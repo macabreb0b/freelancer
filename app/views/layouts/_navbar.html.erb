@@ -1,0 +1,10 @@
+<header>
+  <h1>Freelancer</h1>
+  
+  <% if !current_user %>
+    <%= button_to 'Sign In', new_user_session_path, method: :get %>
+    <%= button_to 'Sign Up', new_user_registration_path, method: :get %>
+  <% else %>
+    <%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  <% end %>
+</header>
