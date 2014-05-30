@@ -1,0 +1,9 @@
+== README
+
+* install devise :smiley_cat:
+* build user slice :boy:
+* build user:clients slice :busts_in_silhouette:
+* build user:projects slice :file_folder:
+* build project:deliverables slice :pencil:
+* built deliverables:invoice slice :moneybag:
+* build auto:email slice :email:
