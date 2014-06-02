@@ -1,0 +1,13 @@
+<p><a href="#/">home</a>&nbsp;> projects</p>
+
+<ul>
+  <% projects.each(function(project) { %>
+    <li>
+      <%= project.escape('name') %> <a href="#/projects/<%= project.id %>">go to project</a>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="#/projects/new">
+  add a new project
+</a>

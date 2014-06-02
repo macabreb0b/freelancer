@@ -1,0 +1,26 @@
+<p><a href="#/">home</a> > 
+  <% if(client) { %>
+    
+    <a href="#/clients">
+      clients</a>&nbsp;>
+    <a href="#/clients/<% client.id %>">
+      <%= client.escape('name') %></a>&nbsp;>
+  <% } else { %> 
+    loading client... >
+  <% }%>
+  <a href="#/projects">projects</a> > <%= project.escape('name')%></p>
+
+project:<h2><%= project.escape('name') %></h2>
+description:<h4><%= project.escape('description') %></h4>
+open:<h4><%= project.escape('open') %></h4>
+client:<h4>
+  <% if(client) { %>
+    <%= client.escape('name') %>
+  <% } else { %> 
+    loading client...
+  <% } %>
+</h4>
+
+<a href="#/projects/<%= project.id %>/edit">
+  edit project
+</a>

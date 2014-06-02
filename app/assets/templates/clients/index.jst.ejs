@@ -1,0 +1,13 @@
+<p><a href="#/">home</a>&nbsp;> clients</p>
+
+<ul>
+  <% clients.each(function(client) { %>
+    <li>
+      <%= client.escape('name') %> <a href="#/clients/<%= client.id %>">go to profile</a>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="#/clients/new">
+  add a new client
+</a>

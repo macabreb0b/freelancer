@@ -1,0 +1,37 @@
+<% var cxlLink; if(client.isNew()) { cxlLink = '#/clients' } else { cxlLink = '#/clients/' + client.id }; %>
+
+<p>
+  <a href="#/">
+    home</a>&nbsp;> 
+  <a href="#/clients">
+    clients</a>&nbsp;> 
+  <% if(client.isNew()) { %>
+    new
+  <% } else { %>
+    <a href="#/clients/<%= client.id %>">
+      <%= client.escape('name')%></a>&nbsp;> edit
+  <% } %>
+</p>
+
+<form>
+  <p id="errors"></p>
+  
+  <label>Name:
+    <input type="text" name="client[name]" value="<%= client.escape('name') %>">
+  </label>
+  <br>
+  
+  <label>Company:
+    <input type="text" name="client[company]" value="<%= client.escape('company') %>">
+  </label>
+  <br>
+  <label>Phone:
+    <input type="text" name="client[phone]" value="<%= client.escape('phone') %>">
+  </label>
+  <br>
+  <label>Email:
+    <input type="text" name="client[email]" value="<%= client.escape('email') %>">
+  </label>
+  <br>
+  <button>Submit</button> <a href="<%= cxlLink %>">cancel</a>
+</form>

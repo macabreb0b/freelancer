@@ -1,0 +1,28 @@
+<p>
+  <a href="#/">home</a>&nbsp;>
+  <a href="#/clients">clients</a>&nbsp;>
+  <%= client.escape('name')%></p>
+
+client:<h2><%= client.escape('name') %></h2>
+company:<h4><%= client.escape('company') %></h4>
+phone:<h4><%= client.escape('phone') %></h4>
+email:<h4><%= client.escape('email') %></h4>
+projects:
+<ul>
+  <% client.projects().each(function(project) { %>
+    <li>
+      <a href="#/projects/<%= project.id %>">
+        <%= project.escape('name') %>
+      </a>
+    <%= project.escape('open') %>
+    </li>
+  <% }) %>
+  <li>
+    <a href="#/clients/<%= client.id %>/projects/new">
+      new project
+    </a>
+  </li>
+</ul>
+<a href="#/clients/<%= client.id %>/edit">
+  edit client
+</a>

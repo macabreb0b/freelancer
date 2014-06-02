@@ -1,0 +1,64 @@
+<% var cxlLink; if(project.isNew()) { cxlLink = '#/projects' } else { cxlLink = '#/projects/' + project.id }; %>
+
+<p>
+  <a href="#/">
+    home</a>&nbsp;> 
+  <% if(client) { %>
+    <a href="#/clients">
+      clients</a>&nbsp;>
+    <a href="#/clients/<%= client.id %>">
+      <%= client.escape('name')%></a>&nbsp;>
+  <% } else { %>
+    <a href="#/projects">
+      projects</a>&nbsp;>
+  <% } %>
+  
+  <% if(project.isNew()) { %>
+    new project
+  <% } else { %>
+    <a href="#/projects/<%= project.id %>">
+      <%= project.escape('name') %>
+    </a>&nbsp;> edit
+  <% } %>
+</p>
+
+<form>
+  <p id="errors"></p>
+  
+  <label>Name:
+    <input type="text" name="project[name]" value="<%= project.escape('name') %>">
+  </label>
+  <br>
+  
+  <label>Client:
+    <select name="project[client_id]">
+      <% clients.each(function(client_option) { %>
+        <option 
+          value="<%= client_option.id %>" 
+          <% if(client && client.id === client_option.id) { %>
+            selected
+          <% } %>>
+          <%= client_option.escape('name') %>
+        </option>
+      <% }) %>
+    </select>
+  </label>
+  <br>
+  <label>Description:
+    <textarea 
+      name="project[description]"><%= project.escape('description') %></textarea>
+  </label>
+  <br>
+  <label>Open?:
+    <input type="hidden" name="project[open]" value="false">
+    <input 
+      type="checkbox" 
+      name="project[open]" 
+      value="true" 
+      <% if(project.escape('open') == 'true') { %>
+        checked
+      <% } %>>
+  </label>
+  <br>
+  <button>Submit</button> <a href="<%= cxlLink %>">cancel</a>
+</form>
