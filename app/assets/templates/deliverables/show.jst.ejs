@@ -1,0 +1,7 @@
+<% if(deliverable.escape('completed')) { %>
+  <button class='close-deliverable'>close it!</button>
+<% } else { %>
+  <button class='open-deliverable'>open it!</button>  
+<% } %>
+
+<%= deliverable.escape('name') %> - <%= deliverable.id %>

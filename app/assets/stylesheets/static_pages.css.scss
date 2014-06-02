@@ -7,13 +7,13 @@ div {
   border: thin solid blue;
 }
 
-#content > div {
-  height: 500px;
+#content > #main {
+//  height: 500px;
 }
 
 #sidebar, #display {
   float: left;
-  height: 500px;
+//  height: 500px;
 }
 
 #sidebar {

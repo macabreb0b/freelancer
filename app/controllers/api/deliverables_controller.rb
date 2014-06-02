@@ -18,6 +18,7 @@ module Api
     end
     
     def create
+      @project = Project.find(params[:id])
     end
     
     private

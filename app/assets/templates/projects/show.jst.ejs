@@ -1,9 +1,8 @@
 <p><a href="#/">home</a> > 
   <% if(client) { %>
-    
     <a href="#/clients">
       clients</a>&nbsp;>
-    <a href="#/clients/<% client.id %>">
+    <a href="#/clients/<%= client.id %>">
       <%= client.escape('name') %></a>&nbsp;>
   <% } else { %> 
     loading client... >
@@ -24,3 +23,16 @@ client:<h4>
 <a href="#/projects/<%= project.id %>/edit">
   edit project</a>&nbsp;
 <button class='delete-project'>delete project</button>
+<br>
+
+Deliverables:
+<form class='new-deliverable'>
+  <label>
+    <input type="text" name="deliverable[name]">
+  </label>
+  <button>add deliverable</button>
+</form>
+<ul class='deliverables'>
+
+</ul>
+

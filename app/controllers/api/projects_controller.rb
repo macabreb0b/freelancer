@@ -2,12 +2,12 @@ module Api
   class ProjectsController < ApplicationController
     def index
       @projects = current_user.projects
-      render json: @projects
+      render 'index.json.jbuilder'
     end
     
     def show
       @project = Project.find(params[:id])
-      render json: @project
+      render 'show.json.jbuilder'
     end
     
     def create

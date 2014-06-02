@@ -55,7 +55,7 @@
       type="checkbox" 
       name="project[open]" 
       value="true" 
-      <% if(project.escape('open') == 'true') { %>
+      <% if(project.escape('open') == 'true' || project.isNew()) { %>
         checked
       <% } %>>
   </label>

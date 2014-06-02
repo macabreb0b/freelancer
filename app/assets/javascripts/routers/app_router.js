@@ -28,9 +28,10 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   home: function() {
     this.mainView();
+    Freelancer.Collections.projects.fetch();
     
     var dashboardView = new Freelancer.Views.Dashboard({
-      collection: Freelancer.Collections.deliverables
+      collection: Freelancer.Collections.projects
     });
     this.swapDisplay(dashboardView);
   },

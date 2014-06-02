@@ -7,7 +7,8 @@ Freelancer.Models.Project = Backbone.Model.extend({
   
   parse: function(payload) {
     if(payload.deliverables) {
-      this.projects().set(payload.deliverables, { parse: true });
+      this.deliverables()
+        .set(payload.deliverables, { parse: true });
       delete payload.deliverables;
     }
     return payload
