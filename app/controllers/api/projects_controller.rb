@@ -24,6 +24,9 @@ module Api
     end
     
     def destroy
+      @project = Project.find(params[:id])
+      @project.destroy
+      render json: {}
     end
     
     def update

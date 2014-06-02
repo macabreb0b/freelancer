@@ -5,6 +5,10 @@ Freelancer.Views.ShowClient = Backbone.View.extend({
     this.listenTo(this.model, 'sync', this.render);
   },
   
+  events: {
+    'click .drop-client': 'dropClient'
+  },
+  
   template: JST['clients/show'],
   
   render: function() {
@@ -13,5 +17,11 @@ Freelancer.Views.ShowClient = Backbone.View.extend({
     })
     this.$el.html(renderedContent);
     return this;
+  },
+  
+  dropClient: function(event) {
+    event.preventDefault();
+    this.model.destroy();
+    Backbone.history.navigate('#/clients', {trigger: true})
   }
 });

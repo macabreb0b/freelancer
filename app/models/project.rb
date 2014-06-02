@@ -13,8 +13,14 @@
 #
 
 class Project < ActiveRecord::Base
+  validates :user, :client, :name, :open, presence: true
+
   belongs_to :user
+  
   belongs_to :client
   
-  validates :user, :client, :name, :open, presence: true
+  has_many :deliverables, 
+    dependent: :destroy, 
+    inverse_of: :project
+    
 end
