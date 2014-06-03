@@ -38,7 +38,7 @@ module Api
         render json: @project.errors.full_messages, status: 422
       end
     end
-    
+
     private
       def project_params
         params.require(:project).permit(:name, :description, :open, :client_id)

@@ -1,6 +1,12 @@
+/*global Freelancer, Backbone, JST, $ */
+
 Freelancer.Views.NewClientProject = Backbone.View.extend({
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render)
+    this.listenTo(this.collection, 'sync', this.render);
+  },
+  
+  events: {
+    'submit form': 'newProject'
   },
   
   template: JST['projects/_form'],
@@ -12,8 +18,28 @@ Freelancer.Views.NewClientProject = Backbone.View.extend({
       }),
       client: this.collection.get(this.client_id),
       clients: this.collection
-    })
+    });
     this.$el.html(renderedContent);
     return this;
+  },
+  
+  newProject: function(event) {
+    event.preventDefault();
+    var view = this;
+    this.$el.find('button').attr('disabled', 'disabled');
+    
+    var params = $(event.target).serializeJSON();
+    var project = new Freelancer.Models.Project(params.project);
+    project.save({}, {
+      wait: true,
+      success: function() {
+        Freelancer.Collections.projects.add(project);
+        Backbone.history.navigate('#/projects/' + project.id, { trigger: true });
+      },
+      error: function(response) {
+        view.$el.find('#errors').html(response.responseJSON);
+        view.$el.find('button').removeAttr('disabled');
+      }
+    });
   }
-})
+});

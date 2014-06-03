@@ -6,7 +6,7 @@ Freelancer.Collections.Projects = Backbone.Collection.extend({
   
   model: Freelancer.Models.Project,
   
-  url: function() {
+  url: function() {    
     if(this.client) {
       return 'api/clients/' + this.client.id + '/projects';      
     } else {

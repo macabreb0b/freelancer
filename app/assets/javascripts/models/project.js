@@ -17,7 +17,7 @@ Freelancer.Models.Project = Backbone.Model.extend({
   deliverables: function() {
     this._deliverables = this._deliverables || 
       new Freelancer.Collections.Deliverables([], {
-        client: this
+        project: this
       });
     return this._deliverables;
   }

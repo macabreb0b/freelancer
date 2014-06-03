@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     end
     
     resources :projects, only: [:index, :create, :update, :destroy, :show] do
-      resources :deliverables, only: [:index, :create]
+      resources :deliverables, only: [:index, :create, :update, :destroy]
     end
+    
+    resources :deliverables, only: [:show]
   end
 end

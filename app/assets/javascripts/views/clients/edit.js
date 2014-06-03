@@ -1,7 +1,9 @@
+/*global Freelancer, Backbone, JST, $ */
+
 Freelancer.Views.EditClient = Backbone.View.extend({
   
   initialize: function() {
-    this.listenTo(this.model, 'sync', this.render)
+    this.listenTo(this.model, 'sync', this.render);
   },
   
   events: {
@@ -13,7 +15,7 @@ Freelancer.Views.EditClient = Backbone.View.extend({
   render: function() {
     var renderedContent = this.template({
       client: this.model
-    })
+    });
     this.$el.html(renderedContent);
     return this;
   },
@@ -25,10 +27,9 @@ Freelancer.Views.EditClient = Backbone.View.extend({
     var client = this.model;
     client.save(data, {
       wait: true,
-      success: function(response) {
-        Backbone.history.navigate('#/clients/' + client.id, { trigger: true })
+      success: function() {
+        Backbone.history.navigate('#/clients/' + client.id, { trigger: true });
       }
-    })
-    
+    });
   }
-})
+});

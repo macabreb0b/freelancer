@@ -2,11 +2,11 @@
 
 Freelancer.Collections.Deliverables = Backbone.Collection.extend({
   initialize: function(models, options) {
-    this.project = options.project
+    this.project = options.project;
   },
   
   url: function() {
-    return this.project.url() + 'deliverables';
+    return 'api/projects/' + this.project.id + '/deliverables';
   },
   
   model: Freelancer.Models.Deliverable

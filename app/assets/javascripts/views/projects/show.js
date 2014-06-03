@@ -25,8 +25,16 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   },
   
   newDeliverable: function(event) {
-    event.preventDefault;
-    var data = $(event.target).serializeJSON();
+    event.preventDefault();
+    var data = $(event.target).serializeJSON()['deliverable'];
+    
+    var view = this;
+    this.model.deliverables().create(data, {
+      wait: true,
+      success: function(response) {
+        view.$('[name="deliverable[name]"]').val('');
+      }
+    })
   },
   
   addDeliverable: function(deliverable) {

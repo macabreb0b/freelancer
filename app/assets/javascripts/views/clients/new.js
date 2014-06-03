@@ -1,4 +1,4 @@
-/*global Freelancer, JST, Backbone, $, console */
+/*global Freelancer, JST, Backbone, $ */
 Freelancer.Views.NewClient = Backbone.View.extend({
   
   events: {
@@ -25,7 +25,7 @@ Freelancer.Views.NewClient = Backbone.View.extend({
     var client = new Freelancer.Models.Client(params.client);
     client.save({}, {
       wait: true,
-      success: function(model, response) {
+      success: function() {
         Freelancer.Collections.clients.add(client);
         Backbone.history.navigate('#/clients/' + client.id, { trigger: true });
       },
@@ -34,6 +34,5 @@ Freelancer.Views.NewClient = Backbone.View.extend({
         view.$el.find('button').removeAttr('disabled');
       }
     });
-    
   }
 });
