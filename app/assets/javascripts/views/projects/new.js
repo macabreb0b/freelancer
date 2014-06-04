@@ -2,11 +2,12 @@
 Freelancer.Views.NewProject = Backbone.View.extend({
   
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render)
+    this.listenTo(this.collection, 'sync', this.render);
   },
   
   events: {
-    'submit form': 'newProject'
+    'submit form': 'newProject',
+    'click cancel-new-project': 'cancelNewProject'
   },
   
   template: JST['projects/_form'],
@@ -41,5 +42,10 @@ Freelancer.Views.NewProject = Backbone.View.extend({
       }
     });
     
+  },
+  
+  newClientProject: function(event) {
+    event.preventDefault();
+    Backbone.history.navigate('#/projects', { trigger: true });
   }
 });

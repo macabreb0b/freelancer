@@ -1,5 +1,3 @@
-<% var cxlLink; if(project.isNew()) { cxlLink = '#/projects' } else { cxlLink = '#/projects/' + project.id }; %>
-
 <p>
   <a href="#/">
     home</a>&nbsp;> 
@@ -60,5 +58,5 @@
       <% } %>>
   </label>
   <br>
-  <button>Submit</button> <a href="<%= cxlLink %>">cancel</a>
+  <button>Submit</button> <a class='cancel-new-project'>cancel</a>
 </form>

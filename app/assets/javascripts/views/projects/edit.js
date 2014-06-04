@@ -1,4 +1,5 @@
 /*global Backbone, Freelancer, $, JST */
+
 Freelancer.Views.EditProject = Backbone.View.extend({
   
   initialize: function() {
@@ -7,7 +8,8 @@ Freelancer.Views.EditProject = Backbone.View.extend({
   },
   
   events: {
-    'submit form': 'updateProject'
+    'submit form': 'updateProject',
+    'click cancel-new-project': 'cancelNewProject'
   },
   
   template: JST['projects/_form'],
@@ -33,6 +35,10 @@ Freelancer.Views.EditProject = Backbone.View.extend({
         Backbone.history.navigate('#/projects/' + project.id, { trigger: true });
       }
     });
-    
+  },
+  
+  cancelNewProject: function(event) {
+    event.preventDefault();
+    Backbone.history.navigate('#/projects/' + this.model.id, { trigger: true });
   }
 });

@@ -126,9 +126,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
           });
           router.swapDisplay(newView);
         }
-        
       }
-      
     });
   },
   
@@ -145,11 +143,11 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   swapDisplay: function(newView) {
-   if(this._currentDisplayView) {
+    if(this._currentDisplayView) {
      this._currentDisplayView.remove();
-   }
-   this._currentDisplayView = newView;
-   this.mainView().$el.find('#display')
+    }
+    this._currentDisplayView = newView;
+    this.mainView().$el.find('#display')
          .html(newView.render().$el); 
   },
   

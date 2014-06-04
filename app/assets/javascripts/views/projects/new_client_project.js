@@ -6,7 +6,8 @@ Freelancer.Views.NewClientProject = Backbone.View.extend({
   },
   
   events: {
-    'submit form': 'newProject'
+    'submit form': 'newProject',
+    'click cancel-new-project': 'cancelNewProject'
   },
   
   template: JST['projects/_form'],
@@ -41,5 +42,10 @@ Freelancer.Views.NewClientProject = Backbone.View.extend({
         view.$el.find('button').removeAttr('disabled');
       }
     });
+  },
+  
+  cancelNewProject: function(event) {
+    event.preventDefault();
+    Backbone.history.navigate('#/clients/' + this.client_id, {trigger: true})
   }
 });
