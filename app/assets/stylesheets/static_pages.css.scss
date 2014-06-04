@@ -3,26 +3,65 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+body, html {
+  background: aliceblue;
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+ }
+
 div {
-  border: thin solid blue;
+//  border: thin solid blue;
 }
 
-#content > #main {
-//  height: 500px;
+#content {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#sidebar, #display {
+#content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#main {
+  background: white;
+  border-left: thin solid grey;
+  border-right: thin solid grey;
+}
+
+#display {
   float: left;
+  width: 600px;
+  border: thin solid red;
 }
 
 #sidebar {
   width: 200px;
-}
-
-#display {
-  width: 500px;
+  float: left;
+  height: 100%;
+  border: thin solid blue;
 }
 
 .completed {
   color: gray;
+}
+
+ul {
+  list-style: none;
+  padding: 10px;
+}
+
+#canvasloader {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }

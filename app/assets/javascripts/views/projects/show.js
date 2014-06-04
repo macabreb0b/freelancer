@@ -1,10 +1,12 @@
-/*global JST, Freelancer, Backbone, alert */
+/*global JST, Freelancer, Backbone, $ */
 
 Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model.deliverables(), 'add', this.addDeliverable);
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(Freelancer.Collections.clients, 'sync', this.render);
+    
+    this.model.deliverables().each(this.addDeliverable.bind(this));
   },
   
   events: {
@@ -26,15 +28,15 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   
   newDeliverable: function(event) {
     event.preventDefault();
-    var data = $(event.target).serializeJSON()['deliverable'];
+    var data = $(event.target).serializeJSON().deliverable;
     
     var view = this;
     this.model.deliverables().create(data, {
       wait: true,
-      success: function(response) {
+      success: function() {
         view.$('[name="deliverable[name]"]').val('');
       }
-    })
+    });
   },
   
   addDeliverable: function(deliverable) {
@@ -47,7 +49,14 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   
   deleteProject: function(event) {
     event.preventDefault();
-    this.model.destroy();
-    Backbone.history.navigate('#/projects', { trigger: true });
+    this.model.destroy({
+      wait: true, 
+      success: function() {
+        // wait to navigate to projects index until model has been destroyed + removed from collection
+        Backbone.history.navigate('#/projects', { 
+          trigger: true 
+        });      
+      }
+  });
   }
 });

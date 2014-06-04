@@ -8,7 +8,7 @@ Freelancer.Models.Client = Backbone.Model.extend({
       this.projects().set(payload.projects, { parse: true });
       delete payload.projects;
     }
-    return payload
+    return payload;
   },
   
   projects: function() {

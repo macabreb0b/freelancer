@@ -38,12 +38,17 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   clientsIndex: function() {
     this.mainView();
+    this.waitingGif();
+    var view = this;
     
-    Freelancer.Collections.clients.fetch();
-    var indexView = new Freelancer.Views.ClientsIndex({
-      collection: Freelancer.Collections.clients
+    Freelancer.Collections.clients.fetch({
+      success: function() {
+        var indexView = new Freelancer.Views.ClientsIndex({
+          collection: Freelancer.Collections.clients
+        });
+        view.swapDisplay(indexView);
+      }
     });
-    this.swapDisplay(indexView);
   },
   
   showClient: function(id) {
@@ -84,7 +89,6 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     
   showProject: function(id) {
     this.mainView();
-    
     var project = Freelancer.Collections.projects.getOrFetch(id);
     var showView = new Freelancer.Views.ShowProject({
       model: project
@@ -94,7 +98,6 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   editProject: function(id) {
     this.mainView();
-    
     var project = Freelancer.Collections.projects.getOrFetch(id);
     Freelancer.Collections.clients.fetch()
     
@@ -107,13 +110,26 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   newProject: function() {
     this.mainView();
+    this.waitingGif();
+    var router = this;
     
-    Freelancer.Collections.clients.fetch();
-    
-    var newView = new Freelancer.Views.NewProject({
-      collection: Freelancer.Collections.clients
+    Freelancer.Collections.clients.fetch({
+      wait: true,
+      success: function(models, response) {
+        // redirect if no clients exist
+        if(typeof response[0] == "undefined") {
+          alert('You must create a client first!')
+          Backbone.history.navigate('#/clients/new', {trigger: true})
+        } else {
+          var newView = new Freelancer.Views.NewProject({
+            collection: Freelancer.Collections.clients
+          });
+          router.swapDisplay(newView);
+        }
+        
+      }
+      
     });
-    this.swapDisplay(newView);
   },
   
   newClientProject: function(id) {
@@ -133,6 +149,20 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
      this._currentDisplayView.remove();
    }
    this._currentDisplayView = newView;
-   this.mainView().$el.find('#display').html(newView.render().$el); 
+   this.mainView().$el.find('#display')
+         .html(newView.render().$el); 
+  },
+  
+  waitingGif: function() {
+    this.mainView().$el.find('#display')
+          .html('<div id="canvasloader"></div>')
+    var cl = new CanvasLoader('canvasloader');
+    cl.setColor('#909fdb'); // default is '#000000'
+    cl.setShape('spiral'); // default is 'oval'
+    cl.setDiameter(100); // default is 40
+    cl.setDensity(27); // default is 40
+    cl.setRange(1); // default is 1.3
+    cl.setFPS(36); // default is 24
+    cl.show(); // Hidden by default
   }
 });

@@ -2,7 +2,7 @@
 
 Freelancer.Views.ProjectsIndex = Backbone.View.extend({
   initialize: function() {
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'sync destroy', this.render);
   },
   
   template: JST['projects/index'],
