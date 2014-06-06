@@ -9,30 +9,28 @@
   <% }%>
   <a href="#/projects">projects</a> > <%= project.escape('name')%></p>
 
-project:<h2><%= project.escape('name') %></h2>
-description:<h4><%= project.escape('description') %></h4>
-open:<h4><%= project.escape('open') %></h4>
-client:<h4>
+<h2><%= project.escape('name') %></h2>
+<a href="#/projects/<%= project.id %>/edit">
+  edit project</a>&nbsp;
+<button class='delete-project'>delete project</button>
+<h4>client:</h4>
   <% if(client) { %>
     <%= client.escape('name') %>
   <% } else { %> 
     loading client...
   <% } %>
-</h4>
-
-<a href="#/projects/<%= project.id %>/edit">
-  edit project</a>&nbsp;
-<button class='delete-project'>delete project</button>
+<h4>description:</h4>
+<pre><%= project.escape('description') %></pre>
+<h4>open:</h4><%= project.escape('open') %>
 <br>
 
-Deliverables:
+<h4>Deliverables:</h4>
+
 <form class='new-deliverable'>
   <label>
     <input type="text" name="deliverable[name]">
   </label>
   <button>add deliverable</button>
 </form>
-<ul class='deliverables'>
 
-</ul>
-
+<ul class='deliverables'></ul>

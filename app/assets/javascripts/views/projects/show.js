@@ -22,6 +22,7 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
       client: Freelancer.Collections.clients.getOrFetch(this.model.get('client_id'))
     });
     this.$el.html(renderedContent);
+    
     this.attachSubviews();
     return this;
   },
@@ -41,10 +42,13 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   
   addDeliverable: function(deliverable) {
     var selector = '.deliverables';
-    var subview = new Freelancer.Views.ShowDeliverable({
-      model: deliverable
-    });
-    this.addSubview(selector, subview);
+    if(!deliverable.get('parent_deliverable_id')) {
+      var subview = new Freelancer.Views.DeliverableListView({
+        model: deliverable,
+        collection: this.model.deliverables()
+      });
+      this.addSubview(selector, subview);
+    }
   },
   
   deleteProject: function(event) {

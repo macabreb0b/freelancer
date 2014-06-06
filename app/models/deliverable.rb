@@ -17,7 +17,8 @@ class Deliverable < ActiveRecord::Base
   validates :completed, :inclusion => { in: [true, false] }
   before_validation :incomplete_by_default
   
-  belongs_to :project
+  belongs_to :project,
+    inverse_of: :deliverables
   
   belongs_to :parent_deliverable,
     primary_key: :id,

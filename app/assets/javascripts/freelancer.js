@@ -4,6 +4,7 @@ window.Freelancer = {
   Views: {},
   Routers: {},
   initialize: function($rootEl) {
+    Freelancer.deliverableViews = []
     new Freelancer.Routers.AppRouter({
       $rootEl: $rootEl
     });
@@ -40,11 +41,11 @@ Backbone.CompositeView = Backbone.View.extend({
   addSubview: function (selector, subview) {
     this.subviews(selector).push(subview);
     // Try to attach the subview. Render it as a convenience.
-    this.attachSubview(selector, subview.render());
+    this.attachSubview(selector, subview);
   },
 
   attachSubview: function (selector, subview) {
-    this.$(selector).append(subview.$el);
+    this.$(selector).append(subview.render().$el);
     // Bind events in case `subview` has previously been removed from
     // DOM.
     subview.delegateEvents();

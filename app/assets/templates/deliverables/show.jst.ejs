@@ -1,11 +1,30 @@
-<% if(deliverable.get('completed')) { %>
-  <button class='open-deliverable'>open it!</button>  
-  <span class='completed'>
-<% } else { %>
-  <button class='close-deliverable'>close it!</button>
-  <span>
-<% } %>
-  <%= deliverable.escape('name') %>
-</span>
+<p><a href="#/">home</a> > 
+  <% if(client) { %>
+    <a href="#/clients">
+      clients</a>&nbsp;>
+    <a href="#/clients/<%= client.id %>">
+      <%= client.escape('name') %></a>&nbsp;>
+  <% } else { %> 
+    loading client... >
+  <% }%>
+  <a href="#/projects">projects</a> > (project name here) > 
+  <%= deliverable.escape('name')%></p>
 
-<button class="remove-task">remove task</button>
+<h2><%= deliverable.escape('name') %></h2>
+<button class='remove-deliverable'>remove deliverable</button>
+<h4>completed:</h4><%= deliverable.escape('completed') %>
+<h4>hourly:</h4><%= deliverable.escape('hourly') %>
+<br>
+
+<h4>Sub-Deliverables:</h4>
+
+<form class='new-subdeliverable'>
+  <label>
+    <input type="text" name="deliverable[name]">
+  </label>
+  <button>add deliverable</button>
+</form>
+
+<ul class='deliverables'>
+
+</ul>

@@ -16,6 +16,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     'projects/:id': 'showProject',
     'projects/:id/edit': 'editProject',
     'clients/:id/projects/new': 'newClientProject'
+    // 'projects/:project_id/deliverables/:id': 'showDeliverable'
   },
   
   mainView: function() {
@@ -142,6 +143,25 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     this.swapDisplay(newView);
   },
   
+  // showDeliverable: function(project_id, id) {
+  //   this.mainView();
+  //   this.waitingGif();
+  //   
+  //   var project = Freelancer.Collections.projects
+  //         .getOrFetch(project_id)
+  //   var deliverable = project.deliverables().get(id)
+  //   var children = project.deliverables().where({
+  //     parent_deliverable_id: id
+  //   });
+  //   
+  //   var showView = new Freelancer.Views.ShowDeliverable({
+  //     model: deliverable,
+  //     collection: children,
+  //     project: project
+  //   });
+  //   this.swapDisplay(showView);
+  // },
+  
   swapDisplay: function(newView) {
     if(this._currentDisplayView) {
      this._currentDisplayView.remove();
@@ -155,12 +175,13 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     this.mainView().$el.find('#display')
           .html('<div id="canvasloader"></div>')
     var cl = new CanvasLoader('canvasloader');
-    cl.setColor('#909fdb'); // default is '#000000'
+    cl.setColor('#e01234'); // default is '#000000'
     cl.setShape('spiral'); // default is 'oval'
-    cl.setDiameter(100); // default is 40
-    cl.setDensity(27); // default is 40
+    cl.setDiameter(58); // default is 40
+    cl.setDensity(95); // default is 40
     cl.setRange(1); // default is 1.3
-    cl.setFPS(36); // default is 24
+    cl.setSpeed(4); // default is 2
+    cl.setFPS(49); // default is 24
     cl.show(); // Hidden by default
   }
 });

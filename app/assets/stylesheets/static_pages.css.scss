@@ -56,7 +56,13 @@ div {
 
 ul {
   list-style: none;
-  padding: 10px;
+  padding: 0;
+}
+
+.subdeliverables, .deliverables {
+  padding-left: 10px;
+  border-left: thin solid blue;
+  margin: 5px;
 }
 
 #canvasloader {
