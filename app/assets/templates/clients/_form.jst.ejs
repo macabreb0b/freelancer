@@ -1,17 +1,17 @@
 <% var cxlLink; if(client.isNew()) { cxlLink = '#/clients' } else { cxlLink = '#/clients/' + client.id }; %>
 
-<p>
-  <a href="#/">
-    home</a>&nbsp;> 
-  <a href="#/clients">
-    clients</a>&nbsp;> 
+<ol class='breadcrumb'>
+  <li><a href="#/">home</a></li>
+  <li><a href="#/clients">clients</a></li>
   <% if(client.isNew()) { %>
-    new
+    <li class="active">new</li>
   <% } else { %>
-    <a href="#/clients/<%= client.id %>">
-      <%= client.escape('name')%></a>&nbsp;> edit
+    <li>
+      <a href="#/clients/<%= client.id %>"><%= client.escape('name')%></a>
+    </li>
+    <li class='active'>edit</li>
   <% } %>
-</p>
+</ol>
 
 <form>
   <p id="errors"></p>

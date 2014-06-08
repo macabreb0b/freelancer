@@ -1,14 +1,15 @@
+<% var disabled %>
+<% if(deliverable.get('completed')) { disabled = 'disabled' } %>
+
 <% if(deliverable.get('completed')) { %>
   <button 
-    class='open-deliverable' 
-    data-id="<%= deliverable.id %>">
+    class='open-deliverable btn btn-sm btn-default'>
     open it!
   </button>  
   <span class='completed'>
 <% } else { %>
   <button 
-    class='close-deliverable' 
-    data-id="<%= deliverable.id %>">
+    class='close-deliverable btn btn-sm btn-default'>
     close it!
   </button>
   <span>
@@ -16,8 +17,13 @@
   <%= deliverable.escape('name') %>
 </span>
 
-<button class="remove-task">remove task</button>
+<button 
+  class="remove-task btn btn-sm btn-warning <%= disabled %>">
+  remove task
+</button>
+<button 
+  class="show-new-subdeliverable btn btn-sm btn-default">
+  +
+</button>
 
-<blockquote>
 <ul class="subdeliverables"></ul>
-</blockquote>

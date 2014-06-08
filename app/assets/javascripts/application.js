@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require serializeJSON
+//= require bootstrap
 //= require heartcode-canvasloader-min
 //= require underscore
 //= require backbone

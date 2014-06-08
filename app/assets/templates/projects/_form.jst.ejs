@@ -1,24 +1,23 @@
-<p>
-  <a href="#/">
-    home</a>&nbsp;> 
+<ol class='breadcrumb'>
+  <li><a href="#/">home</a></li> 
   <% if(client) { %>
-    <a href="#/clients">
-      clients</a>&nbsp;>
-    <a href="#/clients/<%= client.id %>">
-      <%= client.escape('name')%></a>&nbsp;>
-  <% } else { %>
-    <a href="#/projects">
-      projects</a>&nbsp;>
+    <li><a href="#/clients">clients</a></li>
+    <li>
+      <a href="#/clients/<%= client.id %>"><%= 
+        client.escape('name')
+      %></a></li>
   <% } %>
-  
+    <li><a href="#/projects">projects</a></li>
   <% if(project.isNew()) { %>
-    new project
+    <li class='active'>new project</li>
   <% } else { %>
-    <a href="#/projects/<%= project.id %>">
-      <%= project.escape('name') %>
-    </a>&nbsp;> edit
+    <li><a href="#/projects/<%= project.id %>"><%=
+       project.escape('name') 
+       %></a>
+    </li>
+    <li class='active'>edit</li>
   <% } %>
-</p>
+</ol>
 
 <form>
   <p id="errors"></p>
@@ -58,5 +57,5 @@
       <% } %>>
   </label>
   <br>
-  <button>Submit</button> <a class='cancel-new-project'>cancel</a>
+  <button class="btn btn-sm btn-default">Submit</button> <a class='cancel-new-project' href="<%= cxlLink %>">cancel</a>
 </form>

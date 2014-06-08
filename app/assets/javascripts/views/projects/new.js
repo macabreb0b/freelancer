@@ -16,7 +16,8 @@ Freelancer.Views.NewProject = Backbone.View.extend({
     var renderedContent = this.template({
       project: new Freelancer.Models.Project(),
       clients: this.collection,
-      client: false
+      client: false,
+      cxlLink: '#/projects'
     });
     this.$el.html(renderedContent);
     

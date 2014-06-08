@@ -3,21 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-body, html {
-  background: aliceblue;
-  margin: 0;
-  padding: 0;
-}
-
-*, *:before, *:after {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box;
- }
-
-div {
-//  border: thin solid blue;
-}
 
 #content {
   width: 800px;
@@ -26,9 +11,9 @@ div {
 }
 
 #content::after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 #main {
@@ -40,14 +25,15 @@ div {
 #display {
   float: left;
   width: 600px;
-  border: thin solid red;
 }
 
 #sidebar {
   width: 200px;
   float: left;
   height: 100%;
-  border: thin solid blue;
+  ul {
+    width: 180px;
+  }
 }
 
 .completed {
@@ -63,6 +49,14 @@ ul {
   padding-left: 10px;
   border-left: thin solid blue;
   margin: 5px;
+}
+
+.new-subdeliverable {
+  display: none;
+}
+
+blockquote {
+  margin: 15px;
 }
 
 #canvasloader {

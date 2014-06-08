@@ -1,7 +1,8 @@
-<p>
-  <a href="#/">home</a>&nbsp;>
-  <a href="#/clients">clients</a>&nbsp;>
-  <%= client.escape('name')%></p>
+<ol class='breadcrumb'>
+  <li><a href="#/">home</a></li>
+  <li><a href="#/clients">clients</a></li>
+  <li class='active'><%= client.escape('name')%></li>
+</ol>
 
 <h2><%= client.escape('name') %></h2>
 <h4>company:</h4><%= client.escape('company') %>
@@ -25,4 +26,7 @@
 </ul>
 <a href="#/clients/<%= client.id %>/edit">
   edit client</a>&nbsp;
-<button class='drop-client'>drop client</button>
+<button 
+  class='drop-client btn btn-sm btn-default'>
+  drop client
+</button>

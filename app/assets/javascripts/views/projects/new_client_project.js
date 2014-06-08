@@ -18,7 +18,8 @@ Freelancer.Views.NewClientProject = Backbone.View.extend({
         client_id: this.client_id
       }),
       client: this.collection.get(this.client_id),
-      clients: this.collection
+      clients: this.collection,
+      cxlLink: '#/clients/' + this.client_id
     });
     this.$el.html(renderedContent);
     return this;

@@ -1,18 +1,28 @@
-<p><a href="#/">home</a> > 
+<ol class='breadcrumb'>
+
+  <li><a href="#/">home</a></li> 
+  
   <% if(client) { %>
-    <a href="#/clients">
-      clients</a>&nbsp;>
-    <a href="#/clients/<%= client.id %>">
-      <%= client.escape('name') %></a>&nbsp;>
+    <li><a href="#/clients">clients</a></li>
+    <li><a href="#/clients/<%= client.id %>"><%= 
+        client.escape('name') 
+      %></a></li>
   <% } else { %> 
-    loading client... >
+    <li>loading client...</li>
   <% }%>
-  <a href="#/projects">projects</a> > <%= project.escape('name')%></p>
+  <li><a href="#/projects">projects</a></li>
+  <li class='active'><%= project.escape('name')%></li>
+
+</ol>
 
 <h2><%= project.escape('name') %></h2>
 <a href="#/projects/<%= project.id %>/edit">
   edit project</a>&nbsp;
-<button class='delete-project'>delete project</button>
+<button 
+  class='delete-project btn btn-sm btn-default'>
+  delete project
+</button>
+
 <h4>client:</h4>
   <% if(client) { %>
     <%= client.escape('name') %>
@@ -30,7 +40,10 @@
   <label>
     <input type="text" name="deliverable[name]">
   </label>
-  <button>add deliverable</button>
+  <button 
+    class='btn btn-sm btn-default'>
+    add deliverable
+  </button>
 </form>
 
 <ul class='deliverables'></ul>

@@ -18,7 +18,8 @@ Freelancer.Views.EditProject = Backbone.View.extend({
     var renderedContent = this.template({
       project: this.model,
       clients: this.collection,
-      client: this.collection.getOrFetch(this.model.get('client_id'))
+      client: this.collection.getOrFetch(this.model.get('client_id')),
+      cxlLink: '#/projects/' + project.id
     });
     this.$el.html(renderedContent);
     return this;
