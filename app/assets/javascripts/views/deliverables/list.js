@@ -1,7 +1,7 @@
 /*global Freelancer, Backbone, JST, $, alert */
 Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   initialize: function() {
-    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change:completed', this.render);
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.resetSubviews);
     this.resetSubviews();
@@ -9,7 +9,13 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   tagName: 'li',
   
-  className: 'deliverable',
+  className: function() {
+    if(this.model.get('collapsed')) {
+      return 'deliverable collapsed'
+    } else {
+      return 'deliverable' 
+    }
+  },
   
   template: JST['deliverables/list'],
   
@@ -26,8 +32,12 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   },
   
   render: function() {
+    if(this.model.hasChanged("collapsed")) {
+      alert('rendering')
+    }
     var renderedContent = this.template({
-      deliverable: this.model
+      deliverable: this.model,
+      subdeliverableCount: this.subdeliverables.length
     });
     this.$el.html(renderedContent);
     
@@ -38,10 +48,10 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   resetSubviews: function() {
     this.removeSubviews('.subdeliverables');
-    this.subDeliverables = this.collection.where({
+    this.subdeliverables = this.collection.where({
       parent_deliverable_id: this.model.id
     });
-    this.subDeliverables.forEach(this.addDeliverable.bind(this));
+    this.subdeliverables.forEach(this.addDeliverable.bind(this));
   },
   
   closeIt: function(event) {
@@ -95,13 +105,21 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   showSubdeliverables: function(event) {
     event.stopPropagation();
     this.$el.find('.subdeliverables').first().slideDown('fast');
-    this.$el.removeClass('collapsed');
+    var view = this;
+    setTimeout(function() {
+      view.$el.removeClass('collapsed')
+    }, 200);
+    this.model.save({ collapsed: false });
   },
   
   hideSubdeliverables: function(event) {
     event.stopPropagation();
     this.$el.find('.subdeliverables').first().slideUp('fast');
-    this.$el.addClass('collapsed');
+    var view = this;
+    setTimeout(function() {
+      view.$el.addClass('collapsed')
+    }, 200);
+    this.model.save({ collapsed: true });
   },
   
   newSubdeliverable: function(event) {

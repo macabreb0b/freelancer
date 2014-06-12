@@ -88,11 +88,19 @@ ul {
 .subdeliverables {
   padding-left: 6px;
   border-left: thin dashed #428bca;
-  margin: 5px 13px;
+  margin: 0 13px;
+}
+
+.collapsed > .subdeliverables {
+  display: none;
 }
 
 .deliverables {
   padding-top: 10px;
+}
+
+.deliverable {
+  margin: 7px 0;
 }
 
 .new-subdeliverable {

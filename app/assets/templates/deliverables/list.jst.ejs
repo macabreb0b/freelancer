@@ -1,7 +1,7 @@
 <% var disabled %>
-<% if(deliverable.get('completed')) { disabled = 'disabled' } %>
 
 <% if(deliverable.get('completed')) { %>
+  <% disabled = 'disabled' %>
   <button 
     class='checkbox checked btn btn-sm btn-default'>
   </button>  
@@ -20,13 +20,18 @@
   delete
 </button>
 
+<% var dontHide %>
+<% if(subdeliverableCount == '0') { dontHide = 'disabled' } %>
 <button
-  class="show-subdeliverables btn btn-sm btn-default">
-  <span class='caret'></span>
+  class="show-subdeliverables btn btn-sm btn-default <%= dontHide %>">
+  <span class='caret'></span> 
+  <span class='badge badge-primary'><%= subdeliverableCount %></span>
 </button>
 <button
-  class="hide-subdeliverables btn btn-sm btn-default">
+  class="hide-subdeliverables btn btn-sm btn-default <%= dontHide %>">
   <span class='caret caret-reversed'></span>
+  <span class='badge'><%= subdeliverableCount %></span>
+  
 </button>
 
 <button 

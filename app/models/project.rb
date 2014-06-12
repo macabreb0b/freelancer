@@ -23,4 +23,8 @@ class Project < ActiveRecord::Base
   has_many :deliverables, -> { order 'rank ASC' }, 
         dependent: :destroy, 
         inverse_of: :project
+        
+  def children
+    deliverables.where(:parent_deliverable_id => nil)
+  end
 end

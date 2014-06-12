@@ -51,7 +51,7 @@ class Deliverable < ActiveRecord::Base
       if self.parent_deliverable
         self.rank = self.parent_deliverable.children.count
       else
-        self.rank = self.project.deliverables.count
+        self.rank = self.project.children.count
       end
     end
     true # will not pass validation if it returns falsy value
