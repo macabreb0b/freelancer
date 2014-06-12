@@ -32,9 +32,6 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   },
   
   render: function() {
-    if(this.model.hasChanged("collapsed")) {
-      alert('rendering')
-    }
     var renderedContent = this.template({
       deliverable: this.model,
       subdeliverableCount: this.subdeliverables.length
