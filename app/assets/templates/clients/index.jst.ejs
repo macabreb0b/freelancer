@@ -2,11 +2,11 @@
   <li><a href="#/">home</a></li>
   <li class="active">clients</li>
 </ol>
-
+<h1>All Clients</h1>
 <ul>
   <% clients.each(function(client) { %>
     <li>
-      <%= client.escape('name') %> <a href="#/clients/<%= client.id %>">go to profile</a>
+      <%= client.escape('name') %> <a href="#/clients/<%= client.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
     </li>
   <% }) %>
 </ul>

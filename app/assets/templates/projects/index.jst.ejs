@@ -2,11 +2,11 @@
   <li><a href="#/">home</a></li>
   <li class='active'>projects</li>
 </ol>
-
+<h1>All Projects</h1>
 <ul>
   <% projects.each(function(project) { %>
     <li>
-      <%= project.escape('name') %> <a href="#/projects/<%= project.id %>">go to project</a>
+      <%= project.escape('name') %>&nbsp;<a href="#/projects/<%= project.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
     </li>
   <% }) %>
 </ul>

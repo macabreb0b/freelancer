@@ -8,12 +8,52 @@
   width: 800px;
   margin-left: auto;
   margin-right: auto;
+  min-height: 500px;
 }
 
 #content::after {
   content: "";
   display: table;
   clear: both;
+}
+
+.deliverable > .show-subdeliverables {
+  display: none;
+}
+
+.deliverable > .hide-subdeliverables {
+  display: inline-block;
+}
+
+.deliverable.collapsed > .show-subdeliverables {
+  display: inline-block;
+}
+
+.deliverable.collapsed > .hide-subdeliverables {
+  display: none;
+}
+
+.caret.caret-reversed {
+    border-top-width: 0;
+    border-bottom: 4px solid #000000;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+.checkbox.checked {
+  background: image-url('checked.png');
+  border-width: 0;
+  background-size: cover;
+  margin: 5px;
+}
+
+.checkbox.unchecked {
+  background: image-url('unchecked.png');
+  border-width: 0;
+  background-size: cover;
+  margin: 5px;
 }
 
 #main {
@@ -45,10 +85,14 @@ ul {
   padding: 0;
 }
 
-.subdeliverables, .deliverables {
-  padding-left: 10px;
-  border-left: thin solid blue;
-  margin: 5px;
+.subdeliverables {
+  padding-left: 6px;
+  border-left: thin dashed #428bca;
+  margin: 5px 13px;
+}
+
+.deliverables {
+  padding-top: 10px;
 }
 
 .new-subdeliverable {
@@ -64,4 +108,18 @@ blockquote {
   height: 100px;
   margin-left: auto;
   margin-right: auto;
+}
+
+#project_description::-webkit-input-placeholder {
+ color: transparent; 
+}
+
+#project_description::-webkit-input-placeholder::before {
+  display: block;
+  color: #999;
+  content: "1. Make website \A 2. ??? \A 3. Profit";
+}
+
+#deliverable_name {
+  width: 250px;
 }

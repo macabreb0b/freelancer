@@ -32,7 +32,7 @@ module Api
     
     def show
       @client = Client.find(params[:id])
-      render json: @client
+      render 'show.json.jbuilder'
     end
     
     def destroy

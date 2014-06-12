@@ -13,25 +13,69 @@
   <% } %>
 </ol>
 
-<form>
+<form class='form-horizontal' role='form'>
   <p id="errors"></p>
   
-  <label>Name:
-    <input type="text" name="client[name]" value="<%= client.escape('name') %>">
-  </label>
-  <br>
+  <div class='form-group'>
+    <label
+      class='col-sm-2 control-label'
+      for='client_name'>Name:</label>
+    <div class="col-sm-6">
+      <input 
+        id='client_name'
+        class='form-control'
+        placeholder='Tim Cook'
+        type="text" 
+        name="client[name]" 
+        value="<%= client.escape('name') %>">
+    </div>
+  </div>
   
-  <label>Company:
-    <input type="text" name="client[company]" value="<%= client.escape('company') %>">
-  </label>
-  <br>
-  <label>Phone:
-    <input type="text" name="client[phone]" value="<%= client.escape('phone') %>">
-  </label>
-  <br>
-  <label>Email:
-    <input type="text" name="client[email]" value="<%= client.escape('email') %>">
-  </label>
-  <br>
-  <button>Submit</button> <a href="<%= cxlLink %>">cancel</a>
+  <div class='form-group'>
+    <label
+      class='col-sm-2 control-label'
+      for='client_company'>Company:</label>
+    <div class="col-sm-6">
+      <input 
+        id='client_company'
+        class='form-control'
+        placeholder='Apple'
+        type="text" 
+        name="client[company]" 
+        value="<%= client.escape('company') %>">
+    </div>
+  </div>
+  
+  <div class='form-group'>
+    <label 
+      class='col-sm-2 control-label' 
+      for='client_phone'>Phone:</label>
+    <div class="col-sm-6">
+      <input 
+        id='client_phone'
+        class='form-control'
+        placeholder='(555) 123-4567'
+        type="text" 
+        name="client[phone]" 
+        value="<%= client.escape('phone') %>">
+    </div>
+  </div>
+  
+  <div class='form-group'>
+    <label
+      class='col-sm-2 control-label'
+      for='client_email'>Email:</label>
+    <div class="col-sm-6">
+      <input 
+        id="client_email"
+        class='form-control'
+        placeholder='tim@apple.com'
+        type="text" 
+        name="client[email]" 
+        value="<%= client.escape('email') %>">
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-sm-6 col-sm-offset-2'><button class='btn btn-sm btn-default'>Submit</button> <a href="<%= cxlLink %>">cancel</a></div>
+  </div>
 </form>

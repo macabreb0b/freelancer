@@ -13,14 +13,14 @@
 #
 
 class Project < ActiveRecord::Base
-  validates :user, :client, :name, :open, presence: true
+  validates :user, :client, :name, presence: true
+  validates :open, :inclusion => {in: [true, false]}
 
   belongs_to :user
   
   belongs_to :client
   
-  has_many :deliverables, 
-    dependent: :destroy, 
-    inverse_of: :project
-    
+  has_many :deliverables, -> { order 'rank ASC' }, 
+        dependent: :destroy, 
+        inverse_of: :project
 end

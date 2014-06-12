@@ -15,7 +15,14 @@
 
 </ol>
 
-<h2><%= project.escape('name') %></h2>
+<h2><%= project.escape('name') %> &nbsp; <small class='pull-right'>status:
+  <% if(project.escape('open') === 'true') { %>
+    <span class='label label-success'>OPEN</span>
+  <% } else { %>
+    <span class='label label-warning'>CLOSED</span>
+  <% } %>
+  </small>
+</h2>
 <a href="#/projects/<%= project.id %>/edit">
   edit project</a>&nbsp;
 <button 
@@ -31,19 +38,25 @@
   <% } %>
 <h4>description:</h4>
 <pre><%= project.escape('description') %></pre>
-<h4>open:</h4><%= project.escape('open') %>
-<br>
-
 <h4>Deliverables:</h4>
 
-<form class='new-deliverable'>
-  <label>
-    <input type="text" name="deliverable[name]">
-  </label>
-  <button 
-    class='btn btn-sm btn-default'>
-    add deliverable
-  </button>
+<form class='new-deliverable form-inline' role='form'>
+  <div class='form-group'>
+    <label for='deliverable_name' class='sr-only'></label>
+    <input 
+      type="text" 
+      class='form-control'
+      id='deliverable_name'
+      placeholder='What do you have to deliver?'
+      name="deliverable[name]">
+  </div>
+  
+  <div class='form-group'>
+    <button 
+      class='btn btn-sm btn-default'>
+      add deliverable
+    </button>
+  </div>
 </form>
 
 <ul class='deliverables'></ul>

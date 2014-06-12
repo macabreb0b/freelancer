@@ -18,17 +18,17 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     'clients/:id/projects/new': 'newClientProject'
   },
   
-  mainView: function() {
+  mainView: function(section) {
     if(!this._mainView) {
       this._mainView = new Freelancer.Views.MainView();
       this.$rootEl.html(this._mainView.render().$el);
     }
+    this.swapSidebar(section);
     return this._mainView;
   },
   
   home: function() {
-    this.mainView();
-    this.swapSidebar('.home');
+    this.mainView('.home');
     Freelancer.Collections.projects.fetch();
     
     var dashboardView = new Freelancer.Views.Dashboard({
@@ -38,9 +38,8 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   clientsIndex: function() {
-    this.mainView();
+    this.mainView('.clients');
     this.waitingGif();
-    this.swapSidebar('.clients');
     
     var view = this;
     
@@ -55,8 +54,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showClient: function(id) {
-    this.mainView();
-    this.swapSidebar('.clients');
+    this.mainView('.clients');
     
     var client = Freelancer.Collections.clients.getOrFetch(id);
     var showView = new Freelancer.Views.ShowClient({
@@ -66,8 +64,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   editClient: function(id) {
-    this.mainView();
-    this.swapSidebar('.clients');
+    this.mainView('.clients');
     
     var client = Freelancer.Collections.clients.getOrFetch(id);
     var editView = new Freelancer.Views.EditClient({
@@ -77,16 +74,14 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   newClient: function() {
-    this.mainView();
-    this.swapSidebar('.clients');
+    this.mainView('.clients');
     
     var newView = new Freelancer.Views.NewClient();
     this.swapDisplay(newView);
   },
   
   projectsIndex: function() {
-    this.mainView();
-    this.swapSidebar('.projects');
+    this.mainView('.projects');
     this.waitingGif();
     var router = this;
     
@@ -101,9 +96,8 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
     
   showProject: function(id) {
-    this.mainView();
-    this.swapSidebar('.projects');
-
+    this.mainView('.projects');
+    this.waitingGif();
     var project = Freelancer.Collections.projects.getOrFetch(id);
     var showView = new Freelancer.Views.ShowProject({
       model: project
@@ -112,8 +106,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   editProject: function(id) {
-    this.mainView();
-    this.swapSidebar('.projects');
+    this.mainView('.projects');
     
     var project = Freelancer.Collections.projects.getOrFetch(id);
     Freelancer.Collections.clients.fetch();
@@ -126,9 +119,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   newProject: function() {
-    this.mainView();
-    this.swapSidebar('.projects');
-    
+    this.mainView('.projects');
     this.waitingGif();
     var router = this;
     
@@ -150,9 +141,8 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   },
   
   newClientProject: function(id) {
-    this.mainView();
+    this.mainView('.projects');
     this.waitingGif();
-    this.swapSidebar('.projects');
     
     var router = this;
     Freelancer.Collections.clients.fetch({
@@ -171,7 +161,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
      this._currentDisplayView.remove();
     }
     this._currentDisplayView = newView;
-    this.mainView().$el.find('#display')
+    this._mainView.$el.find('#display')
          .html(newView.render().$el); 
   },
   

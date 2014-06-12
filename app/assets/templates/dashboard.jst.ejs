@@ -6,15 +6,15 @@
 <ul>
 <% openProjects.forEach(function(project) { %>
   <li>
-    <a href="#/projects/<%= project.id %>"><%= project.escape('name') %></a>
+    <a href="#/projects/<%= project.id %>"><%= project.escape('name') %> <span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
   </li>
 <% }) %>
 </ul>
 <h3>Closed Projects</h3>
 <ul>
 <% closedProjects.forEach(function(project) { %>
-  <li>
-    <a href="#/projects/<%= project.id %>"><%= project.escape('name') %></a>
+  <li> 
+    <a href="#/projects/<%= project.id %>"><%= project.escape('name') %> <span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
   </li>
 <% }) %>
 </ul>

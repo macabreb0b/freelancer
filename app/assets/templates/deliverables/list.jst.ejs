@@ -3,24 +3,32 @@
 
 <% if(deliverable.get('completed')) { %>
   <button 
-    class='open-deliverable btn btn-sm btn-default'>
-    open it!
+    class='checkbox checked btn btn-sm btn-default'>
   </button>  
   <span class='completed'>
 <% } else { %>
   <button 
-    class='close-deliverable btn btn-sm btn-default'>
-    close it!
+    class='unchecked checkbox btn btn-sm btn-default'>
   </button>
   <span>
 <% } %>
-  <%= deliverable.escape('name') %>
+  <%= deliverable.escape('name') %> <%= deliverable.escape('rank') %>
 </span>
 
 <button 
-  class="remove-task btn btn-sm btn-warning <%= disabled %>">
-  remove task
+  class="remove-task btn btn-sm btn-danger <%= disabled %>">
+  delete
 </button>
+
+<button
+  class="show-subdeliverables btn btn-sm btn-default">
+  <span class='caret'></span>
+</button>
+<button
+  class="hide-subdeliverables btn btn-sm btn-default">
+  <span class='caret caret-reversed'></span>
+</button>
+
 <button 
   class="show-new-subdeliverable btn btn-sm btn-default">
   +

@@ -3,9 +3,17 @@
 Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model.deliverables(), 'add', this.addDeliverable);
+    this.listenTo(this.model.deliverables(), 'remove', this.resetSubviews);
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(Freelancer.Collections.clients, 'sync', this.render);
     
+    
+    // this.model.deliverables().each(this.addDeliverable.bind(this));
+    this.resetSubviews();
+  },
+  
+  resetSubviews: function() {
+    this.removeSubviews('.deliverables');
     this.model.deliverables().each(this.addDeliverable.bind(this));
   },
   

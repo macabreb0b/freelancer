@@ -1,3 +1,5 @@
+/*global window, Backbone, Freelancer, $, document, _ */
+
 window.Freelancer = {
   Models: {},
   Collections: {},
@@ -86,6 +88,14 @@ Backbone.CompositeView = Backbone.View.extend({
 
     var subviews = this.subviews(selector);
     subviews.splice(subviews.indexOf(subview), 1);
+  },
+  
+  removeSubviews: function(selector) {
+    if(this._subviews && this._subviews[selector]) {
+      this._subviews[selector].forEach(function(subview) {
+        subview.remove();
+      });
+    }
   },
 
   subviews: function (selector) {

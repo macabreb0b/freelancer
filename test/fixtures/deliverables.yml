@@ -10,6 +10,8 @@
 #  parent_deliverable_id :integer
 #  created_at            :datetime
 #  updated_at            :datetime
+#  rank                  :integer          not null
+#  collapsed             :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

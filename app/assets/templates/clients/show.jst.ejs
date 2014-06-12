@@ -13,9 +13,9 @@
   <% client.projects().each(function(project) { %>
     <li>
       <a href="#/projects/<%= project.id %>">
-        <%= project.escape('name') %>
+        <%= project.escape('name') %> 
+        <span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span>
       </a>
-    <%= project.escape('open') %>
     </li>
   <% }) %>
   <li>

@@ -10,12 +10,15 @@
 #  parent_deliverable_id :integer
 #  created_at            :datetime
 #  updated_at            :datetime
+#  rank                  :integer          not null
+#  collapsed             :boolean          default(FALSE)
 #
 
 class Deliverable < ActiveRecord::Base
-  validates :project, :name, :presence => true
+  validates :project, :name, :rank, :presence => true
   validates :completed, :inclusion => { in: [true, false] }
   before_validation :incomplete_by_default
+  before_validation :last_rank_by_default
   
   belongs_to :project,
     inverse_of: :deliverables
@@ -28,11 +31,30 @@ class Deliverable < ActiveRecord::Base
   has_many :children,
     primary_key: :id,
     foreign_key: :parent_deliverable_id,
-    class_name: "Deliverable"
+    class_name: "Deliverable",
+    dependent: :destroy
     
+    
+  def all_children
+    kids = self.children
+    self.children.each { |child| kids += child.all_children }
+    kids
+  end
   
   def incomplete_by_default
     self.completed = false if self.completed.nil?
     true # will not pass validation if it returns falsy value
   end
+  
+  def last_rank_by_default
+    if self.rank.nil?
+      if self.parent_deliverable
+        self.rank = self.parent_deliverable.children.count
+      else
+        self.rank = self.project.deliverables.count
+      end
+    end
+    true # will not pass validation if it returns falsy value
+  end
 end
+

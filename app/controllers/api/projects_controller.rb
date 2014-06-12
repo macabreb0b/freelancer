@@ -1,12 +1,14 @@
 module Api
   class ProjectsController < ApplicationController
     def index
-      @projects = current_user.projects
+      @projects = Project.includes(:deliverables)
+            .where(:user_id => current_user.id)
+
       render 'index.json.jbuilder'
     end
     
     def show
-      @project = Project.find(params[:id])
+      @project = Project.includes(:deliverables).find(params[:id])
       render 'show.json.jbuilder'
     end
     

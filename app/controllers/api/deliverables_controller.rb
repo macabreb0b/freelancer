@@ -13,8 +13,12 @@ module Api
     
     def destroy
       @deliverable = Deliverable.find(params[:id])
-      @deliverable.destroy
-      render json: {}
+      unless @deliverable.all_children.any?(&:completed)
+        @deliverable.destroy
+        render json: {}
+      else
+        render json: @deliverable, status: 422
+      end
     end
     
     def update
