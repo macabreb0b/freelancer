@@ -21,18 +21,21 @@ class Deliverable < ActiveRecord::Base
   before_validation :last_rank_by_default
   
   belongs_to :project,
-    inverse_of: :deliverables
+        inverse_of: :deliverables
   
   belongs_to :parent_deliverable,
-    primary_key: :id,
-    foreign_key: :parent_deliverable_id,
-    class_name: "Deliverable"
+        primary_key: :id,
+        foreign_key: :parent_deliverable_id,
+        class_name: "Deliverable"
     
   has_many :children,
-    primary_key: :id,
-    foreign_key: :parent_deliverable_id,
-    class_name: "Deliverable",
-    dependent: :destroy
+        primary_key: :id,
+        foreign_key: :parent_deliverable_id,
+        class_name: "Deliverable",
+        dependent: :destroy
+    
+  has_many :hours, 
+        dependent: :destroy
     
     
   def all_children

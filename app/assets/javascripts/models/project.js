@@ -1,10 +1,6 @@
 Freelancer.Models.Project = Backbone.Model.extend({
   urlRoot: 'api/projects',
   
-  initialize: function(model, options) {
-    
-  },
-  
   parse: function(payload) {
     if(payload.deliverables) {
       this.deliverables()

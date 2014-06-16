@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       resources :deliverables, only: [:index, :create, :update, :destroy]
     end
     
-    resources :deliverables, only: [:show]
+    post 'deliverables/:id/add_hour',
+          to: 'deliverables#add_hour'
+          
+    resources :deliverables, only: [:show] do
+      resources :hours, only: [:destroy]
+    end
   end
 end

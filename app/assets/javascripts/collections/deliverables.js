@@ -10,4 +10,6 @@ Freelancer.Collections.Deliverables = Backbone.Collection.extend({
   },
   
   model: Freelancer.Models.Deliverable
+  
+
 });

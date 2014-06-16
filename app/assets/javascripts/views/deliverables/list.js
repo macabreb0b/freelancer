@@ -4,6 +4,8 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'change:completed', this.render);
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.resetSubviews);
+    this.listenTo(this.model.hours(), 'add remove', this.render);
+    this.getSubdeliverables();
     this.resetSubviews();
   },
   
@@ -28,59 +30,9 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     'click .hide-subdeliverables': 'hideSubdeliverables',
     'click .show-new-subdeliverable': 'toggleNewSubdeliverable',
     'submit .new-subdeliverable': 'newSubdeliverable',
-    'click .remove-task': 'removeTask'
-  },
-  
-  render: function() {
-    var renderedContent = this.template({
-      deliverable: this.model,
-      subdeliverableCount: this.subdeliverables.length
-    });
-    this.$el.html(renderedContent);
-    
-    this.attachSubviews();
-    this.$('.subdeliverables').prepend(this.formTemplate());
-    return this;
-  },
-  
-  resetSubviews: function() {
-    this.removeSubviews('.subdeliverables');
-    this.subdeliverables = this.collection.where({
-      parent_deliverable_id: this.model.id
-    });
-    this.subdeliverables.forEach(this.addDeliverable.bind(this));
-  },
-  
-  closeIt: function(event) {
-    event.stopPropagation();
-
-    this.model.save({ completed: true }, {
-      wait: true
-    });
-  },
-  
-  openIt: function(event) {
-    event.stopPropagation();
-
-    this.model.save({ completed: false }, {
-      wait: true
-    });
-  },
-  
-  removeTask: function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var view = this;
-    
-    this.model.destroy({
-      wait: true,
-      success: function() {
-        view.remove();
-      },
-      error: function() {
-        alert('cannot remove a completed deliverable!');
-      }
-    });
+    'click .remove-task': 'removeTask',
+    'click .add-hour': 'addHour',
+    'click .remove-hour': 'removeHour'
   },
   
   addDeliverable: function(deliverable) {
@@ -94,19 +46,24 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.addSubview(selector, subview);
   },
   
-  toggleNewSubdeliverable: function(event) {
+  addHour: function(event) {
     event.stopPropagation();
-    this.$el.find('form').first().slideToggle('fast');
+    
+    this.model.addHour();
   },
   
-  showSubdeliverables: function(event) {
+  closeIt: function(event) {
     event.stopPropagation();
-    this.$el.find('.subdeliverables').first().slideDown('fast');
-    var view = this;
-    setTimeout(function() {
-      view.$el.removeClass('collapsed')
-    }, 200);
-    this.model.save({ collapsed: false });
+
+    this.model.save({ completed: true }, {
+      wait: true
+    });
+  },
+  
+  getSubdeliverables: function() {
+    this.subdeliverables = this.collection.where({
+      parent_deliverable_id: this.model.id
+    });
   },
   
   hideSubdeliverables: function(event) {
@@ -134,5 +91,73 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
         view.addDeliverable(model);
       }
     });
+  },
+  
+  openIt: function(event) {
+    event.stopPropagation();
+
+    this.model.save({ completed: false }, {
+      wait: true
+    });
+  },
+  
+  removeHour: function(event) {
+    event.stopPropagation();
+    
+    this.model.removeHour();
+  },
+  
+  removeTask: function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var view = this;
+    
+    this.model.destroy({
+      wait: true,
+      success: function() {
+        view.remove();
+      },
+      error: function() {
+        alert('cannot remove a completed deliverable!');
+      }
+    });
+  },
+  
+  render: function() {
+    this.getSubdeliverables();
+    
+    var renderedContent = this.template({
+      deliverable: this.model,
+      subdeliverableCount: this.subdeliverables.length,
+      hours: this.model.hours().length
+    });
+    this.$el.html(renderedContent);
+    
+    this.attachSubviews();
+    this.$('.subdeliverables').prepend(this.formTemplate());
+    return this;
+  },
+  
+  resetSubviews: function() {
+    this.removeSubviews('.subdeliverables');
+    this.getSubdeliverables();
+    this.subdeliverables.forEach(this.addDeliverable.bind(this));
+  },
+  
+  showSubdeliverables: function(event) {
+    event.stopPropagation();
+    this.$el.find('.subdeliverables').first().slideDown('fast');
+    var view = this;
+    setTimeout(function() {
+      view.$el.removeClass('collapsed')
+    }, 200);
+    this.model.save({ collapsed: false });
+  },
+  
+  toggleNewSubdeliverable: function(event) {
+    event.stopPropagation();
+    this.$el.find('form').first().slideToggle('fast');
   }
+  
+ 
 });

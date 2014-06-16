@@ -7,7 +7,7 @@ module Api
     end
     
     def show
-      @deliverable = Deliverable.find(params[:id])
+      @deliverable = Deliverable.includes(:hours).find(params[:id])
       render 'show'
     end
     
@@ -28,6 +28,30 @@ module Api
         render json: @deliverable, status: 200
       else
         render json: @deliverable.errors.full_messages, status: 422
+      end
+    end
+    
+    def add_hour
+      @deliverable = Deliverable.find(params[:id])
+      hour = Hour.new
+      @deliverable.hours << hour
+      
+      if @deliverable.save
+        render json: hour
+      else
+        render json: @deliverable.errors.full_messages, status: 422
+      end
+      
+    end
+    
+    def remove_hour
+      @deliverable = Deliverable.find(params[:id])
+      hour = @deliverable.hours.where(:invoiced  => false).last
+      if hour
+        hour.destroy
+        render json: {}
+      else
+        render json: @deliverable, status: 422
       end
     end
     
