@@ -33,7 +33,7 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
   
   removeHour: function() {
     var hour = this.hours().findWhere({ 
-      invoiced: false
+      invoice_id: null
     });
     
     if (hour) {

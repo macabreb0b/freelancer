@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
   end
   
   def uninvoiced_hours
-    self.hours.where(:invoiced => false).count
+    self.hours.where(:invoice_id => nil).count
   end
   
   def children
