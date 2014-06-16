@@ -1,7 +1,4 @@
-<% var disabled %>
-
 <% if(deliverable.get('completed')) { %>
-  <% disabled = 'disabled' %>
   <button 
     class='checkbox checked btn btn-sm btn-default'>
   </button>  
@@ -12,7 +9,7 @@
   </button>
   <span>
 <% } %>
-  <%= deliverable.escape('name') %> <%= deliverable.id %>
+  <%= deliverable.escape('name') %> <%  deliverable.id %>
 </span>
 
 <div class='panel panel-warning panel-hours'>
@@ -23,24 +20,25 @@
   Hours: <%= hours %>
   <button 
     class='add-hour btn btn-sm btn-success
-    <% if(deliverable.get('completed')) {%> disabled <% }%>'>
+    <% if(deliverable.get('completed')) {%> disabled <% } %>'>
     <span class='glyphicon glyphicon-plus-sign'></span></button>
 </div>
 
 <button 
-  class="remove-task btn btn-sm btn-danger <%= disabled %>">
+  class="remove-task btn btn-sm btn-danger
+  <% if(deliverable.get('completed')) {%> disabled <% } %>">
   delete
 </button>
 
-<% var dontHide %>
-<% if(subdeliverableCount == '0') { dontHide = 'disabled' } %>
 <button
-  class="show-subdeliverables btn btn-sm btn-default <%= dontHide %>">
+  class="show-subdeliverables btn btn-sm btn-default 
+  <% if(subdeliverableCount == '0') { %> disabled <% } %>">
   <span class='caret'></span> 
   <span class='badge badge-primary'><%= subdeliverableCount %></span>
 </button>
 <button
-  class="hide-subdeliverables btn btn-sm btn-default <%= dontHide %>">
+  class="hide-subdeliverables btn btn-sm btn-default 
+  <% if(subdeliverableCount == '0') { %> disabled <% } %>">
   <span class='caret caret-reversed'></span>
   <span class='badge'><%= subdeliverableCount %></span>
   

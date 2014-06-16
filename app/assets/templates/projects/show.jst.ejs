@@ -1,5 +1,4 @@
 <ol class='breadcrumb'>
-
   <li><a href="#/">home</a></li> 
   
   <% if(client) { %>
@@ -12,15 +11,16 @@
   <% }%>
   <li><a href="#/projects">projects</a></li>
   <li class='active'><%= project.escape('name')%></li>
-
 </ol>
 
-<h2><%= project.escape('name') %> &nbsp; <small class='pull-right'>status:
-  <% if(project.escape('open') === 'true') { %>
-    <span class='label label-success'>OPEN</span>
-  <% } else { %>
-    <span class='label label-warning'>CLOSED</span>
-  <% } %>
+<h2><%= project.escape('name') %> &nbsp; 
+  <small class='pull-right'>
+    status:
+    <% if(project.escape('open') === 'true') { %>
+      <span class='label label-success'>OPEN</span>
+    <% } else { %>
+      <span class='label label-warning'>CLOSED</span>
+    <% } %>
   </small>
 </h2>
 <a href="#/projects/<%= project.id %>/edit">
@@ -29,6 +29,27 @@
   class='delete-project btn btn-sm btn-default'>
   delete project
 </button>
+
+<h4>hours:</h4>
+<div class='panel panel-primary hours-display'>
+  <div class='panel-heading'>
+    <h2 class='panel-title'>uninvoiced hours: 
+      <span class='uninvoiced'>
+        <%= project.escape('uninvoiced_hours') %>
+      </span>&nbsp;
+      <a href="#" class='make-invoice label label-primary'>
+        invoice&nbsp;
+        <span class='glyphicon glyphicon-send'></span>&nbsp;</a>
+    </h2>
+  </div>
+  
+  <div class='panel-footer'>
+    total hours: 
+    <span class='total'>
+      <%= project.get('total_hours') %>
+    </span>
+  </div>
+</div>
 
 <h4>client:</h4>
   <% if(client) { %>

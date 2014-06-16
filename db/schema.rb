@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613202753) do
+ActiveRecord::Schema.define(version: 20140616044808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,13 +44,23 @@ ActiveRecord::Schema.define(version: 20140613202753) do
   add_index "deliverables", ["project_id"], name: "index_deliverables_on_project_id", using: :btree
 
   create_table "hours", force: true do |t|
-    t.boolean  "invoiced",       default: false
     t.integer  "deliverable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "invoice_id"
+  end
+
+  add_index "hours", ["deliverable_id"], name: "index_hours_on_deliverable_id", using: :btree
+
+  create_table "invoices", force: true do |t|
+    t.integer  "project_id", null: false
+    t.datetime "date",       null: false
+    t.boolean  "paid",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "hours", ["deliverable_id"], name: "index_hours_on_deliverable_id", using: :btree
+  add_index "invoices", ["project_id"], name: "index_invoices_on_project_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.integer  "user_id",     null: false

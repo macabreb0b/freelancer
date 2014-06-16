@@ -6,10 +6,11 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     this.listenTo(this.model.deliverables(), 'remove', this.resetSubviews);
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(Freelancer.Collections.clients, 'sync', this.render);
-    
+    this.listenTo(this.model.deliverables(), 'update-hours', this.updateDisplay);
     
     // this.model.deliverables().each(this.addDeliverable.bind(this));
     this.resetSubviews();
+    view = this;
   },
   
   resetSubviews: function() {
@@ -23,30 +24,6 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   },
   
   template: JST['projects/show'],
-  
-  render: function() {
-    var renderedContent = this.template({
-      project: this.model,
-      client: Freelancer.Collections.clients.getOrFetch(this.model.get('client_id'))
-    });
-    this.$el.html(renderedContent);
-    
-    this.attachSubviews();
-    return this;
-  },
-  
-  newDeliverable: function(event) {
-    event.preventDefault();
-    var data = $(event.target).serializeJSON().deliverable;
-    
-    var view = this;
-    this.model.deliverables().create(data, {
-      wait: true,
-      success: function() {
-        view.$('[name="deliverable[name]"]').val('');
-      }
-    });
-  },
   
   addDeliverable: function(deliverable) {
     var selector = '.deliverables';
@@ -69,6 +46,54 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
           trigger: true 
         });      
       }
-  });
+    });
+  },
+  
+  newDeliverable: function(event) {
+    event.preventDefault();
+    var data = $(event.target).serializeJSON().deliverable;
+    
+    var view = this;
+    this.model.deliverables().create(data, {
+      wait: true,
+      success: function() {
+        view.$('[name="deliverable[name]"]').val('');
+      }
+    });
+  },
+  
+  render: function() {
+    var renderedContent = this.template({
+      project: this.model,
+      client: Freelancer.Collections.clients.getOrFetch(this.model.get('client_id'))
+    });
+    this.$el.html(renderedContent);
+    
+    this.attachSubviews();
+    return this;
+  },
+  
+  updateDisplay: function(addOrRemove) {
+    var $uninvoiced = this.$el.find('.uninvoiced');
+    var $total = this.$el.find('.total');
+    var uninvoiced = this.model.get('uninvoiced_hours');
+    var total = this.model.get('total_hours');
+    
+    if(addOrRemove == 'add') {
+      uninvoiced += 1
+      total += 1
+    } else {
+      uninvoiced -= 1
+      total -= 1
+    }
+    
+    this.model.set('uninvoiced_hours', uninvoiced);
+    this.model.set('total_hours', total);
+    $uninvoiced.text(uninvoiced)
+    $total.text(total)
   }
+  
+ 
+  
+
 });

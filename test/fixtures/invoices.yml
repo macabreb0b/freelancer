@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 
+  date: 2014-06-16 00:38:38
+  paid: false
+
+two:
+  project_id: 
+  date: 2014-06-16 00:38:38
+  paid: false

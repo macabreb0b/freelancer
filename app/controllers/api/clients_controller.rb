@@ -31,7 +31,7 @@ module Api
     end
     
     def show
-      @client = Client.find(params[:id])
+      @client = Client.includes(:projects).find(params[:id])
       render 'show.json.jbuilder'
     end
     

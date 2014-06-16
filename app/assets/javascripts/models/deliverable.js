@@ -1,4 +1,4 @@
-/*global Freelancer, Backbone, $, console */
+/*global Freelancer, Backbone, $, console, alert */
 
 Freelancer.Models.Deliverable = Backbone.Model.extend({
   parse: function(payload) {
@@ -26,20 +26,21 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
       method: 'post',
       success: function(model) {
         that.hours().add(model);
+        that.collection.trigger('update-hours', 'add');
       }
     });
   },
   
   removeHour: function() {
-    var that = this;
     var hour = this.hours().findWhere({ 
       invoiced: false
-    })
+    });
     
     if (hour) {
       hour.destroy({
         wait: true
-      })
+      });
+      this.collection.trigger('update-hours', 'remove');
     } else {
       alert('no uninvoiced hours to remove!');
     } 

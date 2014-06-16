@@ -119,7 +119,7 @@ blockquote {
 }
 
 #project_description::-webkit-input-placeholder {
- color: transparent; 
+ color: transparent;
 }
 
 #project_description::-webkit-input-placeholder::before {
@@ -136,4 +136,8 @@ blockquote {
   padding: 5px;
   display: inline-block;
   margin-bottom: 0;
+}
+
+.hours-display {
+  display: inline-block;
 }

@@ -14,7 +14,7 @@
 
 class Project < ActiveRecord::Base
   validates :user, :client, :name, presence: true
-  validates :open, :inclusion => {in: [true, false]}
+  validates :open, :inclusion => { in: [true, false] }
 
   belongs_to :user
   
@@ -24,6 +24,17 @@ class Project < ActiveRecord::Base
         dependent: :destroy, 
         inverse_of: :project
         
+  has_many :hours, 
+        through: :deliverables
+  
+  def total_hours
+    self.hours.count
+  end
+  
+  def uninvoiced_hours
+    self.hours.where(:invoiced => false).count
+  end
+  
   def children
     deliverables.where(:parent_deliverable_id => nil)
   end
