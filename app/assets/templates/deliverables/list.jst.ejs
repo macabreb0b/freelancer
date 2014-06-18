@@ -1,16 +1,31 @@
+<button
+  class="show-subdeliverables btn btn-sm btn-default 
+  <% if(subdeliverableCount == '0') { %> disabled <% } %>">
+  <span class='caret'></span> 
+  <span class='badge badge-primary'><%= subdeliverableCount %></span>
+</button>
+<button
+  class="hide-subdeliverables btn btn-sm btn-default 
+  <% if(subdeliverableCount == '0') { %> disabled <% } %>">
+  <span class='caret caret-reversed'></span>
+  <span class='badge'><%= subdeliverableCount %></span>
+</button>
+
 <% if(deliverable.get('completed')) { %>
   <button 
     class='checkbox checked btn btn-sm btn-default'>
   </button>  
-  <span class='completed'>
 <% } else { %>
   <button 
     class='unchecked checkbox btn btn-sm btn-default'>
   </button>
-  <span>
 <% } %>
+
+<span class="<% if(deliverable.get('completed')) {%> completed <% } %>">
   <%= deliverable.escape('name') %> <%  deliverable.id %>
 </span>
+
+
 
 <div class='panel panel-warning panel-hours'>
   <button
@@ -24,31 +39,17 @@
     <span class='glyphicon glyphicon-plus-sign'></span></button>
 </div>
 
-<button 
-  class="remove-task btn btn-sm btn-danger
-  <% if(deliverable.get('completed')) {%> disabled <% } %>">
-  delete
-</button>
-
-<button
-  class="show-subdeliverables btn btn-sm btn-default 
-  <% if(subdeliverableCount == '0') { %> disabled <% } %>">
-  <span class='caret'></span> 
-  <span class='badge badge-primary'><%= subdeliverableCount %></span>
-</button>
-<button
-  class="hide-subdeliverables btn btn-sm btn-default 
-  <% if(subdeliverableCount == '0') { %> disabled <% } %>">
-  <span class='caret caret-reversed'></span>
-  <span class='badge'><%= subdeliverableCount %></span>
-  
-</button>
-
 
 
 <button 
   class="show-new-subdeliverable btn btn-sm btn-default">
-  <span class='label label-primary'>new</span>
+  new <span class='glyphicon glyphicon-leaf primary'></span>
+</button>
+
+<button 
+  class="remove-task btn btn-sm btn-default 
+  <% if(deliverable.get('completed')) {%> disabled <% } %>">
+  brn <span class='glyphicon glyphicon-fire danger'></span>
 </button>
 
 <ul class="subdeliverables"></ul>
