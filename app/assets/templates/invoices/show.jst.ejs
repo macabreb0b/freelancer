@@ -1,0 +1,15 @@
+<ol class='breadcrumb'>
+  <li><a href="#/">home</a></li>
+  <li><a href="#/invoices">invoices</a></li>
+  <li class='active'><%= invoice.escape('date')%></li>
+</ol>
+
+<h2><%= invoice.escape('date') %></h2>
+
+
+<a href="#/invoices/<%= invoice.id %>/edit">
+  edit invoice</a>&nbsp;
+<button 
+  class='drop-invoice btn btn-sm btn-default'>
+  drop invoice
+</button>

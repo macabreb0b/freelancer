@@ -17,5 +17,7 @@ Rails.application.routes.draw do
     resources :deliverables, only: [:show] do
       resources :hours, only: [:destroy]
     end
+    
+    resources :invoices, only: [:index, :create, :update, :destroy, :show]
   end
 end

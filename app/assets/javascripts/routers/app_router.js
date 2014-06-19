@@ -15,7 +15,11 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     'projects/new': 'newProject',
     'projects/:id': 'showProject',
     'projects/:id/edit': 'editProject',
-    'clients/:id/projects/new': 'newClientProject'
+    'clients/:id/projects/new': 'newClientProject',
+    'invoices': 'invoicesIndex',
+    'invoices/new': 'newInvoice',
+    'invoices/:id': 'showInvoice',
+    'invoices/:id/edit': 'editInvoice'
   },
   
   mainView: function(section) {
@@ -138,6 +142,32 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
         }
       }
     });
+  },
+  
+  invoicesIndex: function() {
+    this.mainView('.invoices');
+    this.waitingGif();
+    var router = this;
+    
+    Freelancer.Collections.invoices.fetch({
+      wait: true,
+      success: function() {
+        var newView = new Freelancer.Views.InvoicesIndex({
+          collection: Freelancer.Collections.invoices
+        });
+        router.swapDisplay(newView);
+      }
+    });
+  },
+  
+  showInvoice: function(id) {
+    this.mainView('.invoices');
+    this.waitingGif();
+    var invoice = Freelancer.Collections.invoices.getOrFetch(id);
+    var newView = new Freelancer.Views.ShowInvoice({
+      model: invoice
+    });
+    this.swapDisplay(newView);
   },
   
   newClientProject: function(id) {

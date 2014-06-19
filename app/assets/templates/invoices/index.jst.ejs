@@ -1,0 +1,16 @@
+<ol class='breadcrumb'>
+  <li><a href="#/">home</a></li>
+  <li class="active">invoices</li>
+</ol>
+<h1>All Invoices</h1>
+<ul>
+  <% invoices.each(function(invoice) { %>
+    <li>
+      <%= invoice.escape('date') %> <a href="#/invoices/<%= invoice.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="#/invoices/new">
+  add a new invoice
+</a>

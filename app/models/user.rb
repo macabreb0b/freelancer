@@ -26,4 +26,6 @@ class User < ActiveRecord::Base
   has_many :clients, dependent: :destroy
   
   has_many :projects
+  
+  has_many :invoices, through: :projects
 end

@@ -26,6 +26,8 @@ class Project < ActiveRecord::Base
         
   has_many :hours, 
         through: :deliverables
+        
+  has_many :invoices
   
   def total_hours
     self.hours.count
