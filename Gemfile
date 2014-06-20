@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'devise'
 gem 'backbone-on-rails'
 gem 'rails_12factor'
+gem 'thin'
 
 group :development do
   gem 'spring'
