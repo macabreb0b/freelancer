@@ -28,6 +28,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
       this.$rootEl.html(this._mainView.render().$el);
     }
     this.swapSidebar(section);
+    this._mainView.spinner('#display');
     return this._mainView;
   },
   
@@ -43,7 +44,6 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   clientsIndex: function() {
     this.mainView('.clients');
-    this.waitingGif();
     
     var view = this;
     
@@ -86,7 +86,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   projectsIndex: function() {
     this.mainView('.projects');
-    this.waitingGif();
+
     var router = this;
     
     Freelancer.Collections.projects.fetch({
@@ -101,7 +101,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     
   showProject: function(id) {
     this.mainView('.projects');
-    this.waitingGif();
+
     var project = Freelancer.Collections.projects.getOrFetch(id);
     project.fetch();
     var showView = new Freelancer.Views.ShowProject({
@@ -125,7 +125,6 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   newProject: function() {
     this.mainView('.projects');
-    this.waitingGif();
     var router = this;
     
     Freelancer.Collections.clients.fetch({
@@ -147,7 +146,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   invoicesIndex: function() {
     this.mainView('.invoices');
-    this.waitingGif();
+
     var router = this;
     
     Freelancer.Collections.invoices.fetch({
@@ -163,7 +162,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   showInvoice: function(id) {
     this.mainView('.invoices');
-    this.waitingGif();
+
     var invoice = Freelancer.Collections.invoices.getOrFetch(id);
     var newView = new Freelancer.Views.ShowInvoice({
       model: invoice
@@ -173,7 +172,6 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   newClientProject: function(id) {
     this.mainView('.projects');
-    this.waitingGif();
     
     var router = this;
     Freelancer.Collections.clients.fetch({
@@ -203,19 +201,5 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
       $sidebar.find('li').removeClass('active');
       $sidebar.find(section).first().addClass('active');
     }
-  },
-  
-  waitingGif: function() {
-    this.mainView().$el.find('#display')
-          .html('<div id="canvasloader"></div>');
-    var cl = new CanvasLoader('canvasloader');
-    cl.setColor('#e01234'); // default is '#000000'
-    cl.setShape('spiral'); // default is 'oval'
-    cl.setDiameter(58); // default is 40
-    cl.setDensity(95); // default is 40
-    cl.setRange(1); // default is 1.3
-    cl.setSpeed(4); // default is 2
-    cl.setFPS(49); // default is 24
-    cl.show(); // Hidden by default
   }
 });

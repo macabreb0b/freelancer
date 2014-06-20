@@ -30,7 +30,8 @@
 <div class='panel panel-warning panel-hours'>
   <button
     class='remove-hour btn btn-sm btn-warning 
-    <% if(hours === 0 || deliverable.get('completed')) {%> disabled <% }%>'>
+    <% if(deliverable.get('completed')) {%> disabled <% }%>
+    <% if(!removable) { %> greyed-out disabled <% } %>'>
     <span class='glyphicon glyphicon-minus-sign'></span></button>
   Hours: <%= hours %>
   <button 

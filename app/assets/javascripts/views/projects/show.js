@@ -46,6 +46,8 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   
   deleteProject: function(event) {
     event.preventDefault();
+    this.spinner();
+    
     this.model.destroy({
       wait: true, 
       success: function() {
@@ -59,7 +61,7 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   
   makeInvoice: function(event) {
     // show modal
-    this.waitingGif();
+    this.spinner();
     
     $.ajax({
       url: this.model.url() + '/invoice',
@@ -113,18 +115,5 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
         this.model.get('uninvoiced_hours_count') - 1);
     this.model.set('total_hours', 
         this.model.get('total_hours') - 1);
-  },
-  
-  waitingGif: function() {
-    this.$el.html('<div id="canvasloader"></div>');
-    var cl = new CanvasLoader('canvasloader');
-    cl.setColor('#e01234'); // default is '#000000'
-    cl.setShape('spiral'); // default is 'oval'
-    cl.setDiameter(58); // default is 40
-    cl.setDensity(95); // default is 40
-    cl.setRange(1); // default is 1.3
-    cl.setSpeed(4); // default is 2
-    cl.setFPS(49); // default is 24
-    cl.show(); // Hidden by default
   }
 });

@@ -10,22 +10,24 @@ Freelancer.Views.ShowInvoice = Backbone.View.extend({
     'click .drop-invoice': 'dropInvoice'
   },
   
-  dropInvoice: function(event) {
+  dropInvoice: function() {
     var project_id = this.model.get('project_id');
     var project = Freelancer.Collections.projects.getOrFetch(project_id);
     // replace view with a loading gif here
+    this.spinner();
     
     this.model.destroy({
       wait: true,
-      success: function(model, response) {
-        // project.reset();
-        Backbone.history.navigate('#/projects/' + project_id, {trigger: true})
+      success: function() {
+        Backbone.history.navigate('#/projects/' + project_id, { 
+          trigger: true 
+        });
       },
       error: function(model, response) {
-        alert('error!')
-        debugger
+        alert('error!');
+        debugger;
       }
-    })
+    });
   },
   
   render: function() {

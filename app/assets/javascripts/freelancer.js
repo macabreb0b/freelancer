@@ -38,6 +38,26 @@ Backbone.Collection.prototype.getOrFetch = function(id) {
   }
 };
 
+Backbone.View.prototype.spinner = function(selector) {
+  var $target;
+  if(selector) {
+    $target = this.$el.find(selector)
+  } else {
+    $target = this.$el
+  }
+  $target.html('<div id="canvasloader"></div>')
+  
+  var cl = new CanvasLoader('canvasloader');
+  cl.setColor('#e01234'); // default is '#000000'
+  cl.setShape('spiral'); // default is 'oval'
+  cl.setDiameter(58); // default is 40
+  cl.setDensity(95); // default is 40
+  cl.setRange(1); // default is 1.3
+  cl.setSpeed(4); // default is 2
+  cl.setFPS(49); // default is 24
+  cl.show(); // Hidden by default
+};
+
 Backbone.CompositeView = Backbone.View.extend({
   addSubview: function (selector, subview) {
     this.subviews(selector).push(subview);

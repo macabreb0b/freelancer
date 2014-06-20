@@ -129,7 +129,8 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     var renderedContent = this.template({
       deliverable: this.model,
       subdeliverableCount: this.subdeliverables.length,
-      hours: this.model.hours().length
+      hours: this.model.hours().length,
+      removable: this.model.checkRemovable()
     });
     this.$el.html(renderedContent);
     

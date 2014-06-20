@@ -157,3 +157,8 @@ blockquote {
 .invoice-table .center.total {
   font-weight: 700;
 }
+
+.btn-warning.disabled.greyed-out {
+  background-color: #cecece;
+  border-color: #999999;
+}
