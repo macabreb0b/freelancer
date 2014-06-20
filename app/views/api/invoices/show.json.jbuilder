@@ -1,0 +1,1 @@
+json.partial!("api/invoices/invoice", invoice: @invoice, hours: @invoice.hours)

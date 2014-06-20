@@ -19,4 +19,16 @@ class Invoice < ActiveRecord::Base
   has_one :user, through: :project
   
   has_many :hours
+  
+  def client_name
+    client.name
+  end
+  
+  def client_email
+    client.email
+  end
+  
+  def client_phone
+    client.phone
+  end
 end

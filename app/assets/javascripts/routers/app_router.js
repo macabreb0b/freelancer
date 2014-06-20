@@ -133,7 +133,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
         // redirect if no clients exist
         if(typeof response[0] == "undefined") {
           window.alert('You must create a client first!');
-          Backbone.history.navigate('#/clients/new', {trigger: true});
+          Backbone.history.navigate('#/clients/new', { trigger: true });
         } else {
           var newView = new Freelancer.Views.NewProject({
             collection: Freelancer.Collections.clients

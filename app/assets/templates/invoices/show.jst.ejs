@@ -5,8 +5,43 @@
 </ol>
 
 <h2><%= invoice.escape('date') %></h2>
+<h4>project:</h4>
 
-
+<% if(typeof project !== 'undefined') { %>
+  <%= project.escape('name') %>
+<% } else { %>
+  go to project
+<% }%>
+<a href="#/projects/<%= invoice.escape('project_id') %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
+<h4>invoice to:</h4>
+<%= invoice.escape('client_name') %>
+<a href="#/clients/<%= invoice.escape('client_id') %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a><br>
+<%= invoice.escape('client_phone') %><br>
+<%= invoice.escape('client_email') %><br>
+<br>
+<h4>work delivered:</h4>
+<table class='invoice-table table table-hover'>
+  <thead>
+    <tr>
+      <th class='col col-xs-7'>Description</th>
+      <th class='col-xs-2'>Hourly ($)</th>
+      <th class='col-xs-2'>Hours (#)</th>
+      <th class='col-xs-1'>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if(typeof deliverables !== 'undefined') { %>
+      <% deliverables.each(function(deliverable) { %>
+        <tr>
+          <td><%= deliverable.escape('name') %></td>
+          <td><%= deliverable.escape('hourly') %></td>
+          <td><%= deliverable.escape('hours') %></td>
+          <td><%= deliverable.total() %></td>
+        </tr>
+      <% }) %>
+    <% } %>
+  </tbody>
+</table>
 <a href="#/invoices/<%= invoice.id %>/edit">
   edit invoice</a>&nbsp;
 <button 

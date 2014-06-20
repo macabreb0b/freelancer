@@ -37,9 +37,12 @@
       <span class='uninvoiced'>
         <%= project.escape('uninvoiced_hours') %>
       </span>&nbsp;
-      <a href="#" class='make-invoice label label-primary'>
+      <button class='make-invoice btn btn-sm btn-primary
+      <% if(project.escape('uninvoiced_hours') && project.escape('uninvoiced_hours') < 1) { %>
+      disabled
+      <% } %>'>
         invoice&nbsp;
-        <span class='glyphicon glyphicon-send'></span>&nbsp;</a>
+        <span class='glyphicon glyphicon-send'></span>&nbsp;</button>
     </h2>
   </div>
   
@@ -58,7 +61,7 @@
     loading client...
   <% } %>
 <h4>description:</h4>
-<pre><%= project.escape('description') %></pre>
+<pre class='pre-scrollable'><%= project.escape('description') %></pre>
 <h4>Deliverables:</h4>
 
 <form class='new-deliverable form-inline' role='form'>

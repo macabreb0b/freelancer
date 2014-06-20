@@ -7,6 +7,11 @@ Freelancer.Models.Project = Backbone.Model.extend({
         .set(payload.deliverables, { parse: true });
       delete payload.deliverables;
     }
+    if(payload.invoices) {
+      this.invoices()
+        .set(payload.invoices, { parse: true });
+      delete payload.invoices;
+    }
     return payload
   },
   
@@ -16,5 +21,13 @@ Freelancer.Models.Project = Backbone.Model.extend({
         project: this
       });
     return this._deliverables;
+  },
+  
+  invoices: function() {
+    this._invoices = this._invoices || 
+      new Freelancer.Collections.Invoices([], {
+        project: this
+      });
+    return this._invoices;
   }
 })

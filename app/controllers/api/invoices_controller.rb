@@ -7,12 +7,12 @@ class Api::InvoicesController < ApplicationController
   
   def index
     @invoices = current_user.invoices
-    render json: @invoices
+    render 'index'
   end
   
   def show
     @invoice = Invoice.find(params[:id])
-    render json: @invoice
+    render 'show'
   end
   
   def update

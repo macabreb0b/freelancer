@@ -8,8 +8,11 @@ Rails.application.routes.draw do
     end
     
     resources :projects, only: [:index, :create, :update, :destroy, :show] do
-      resources :deliverables, only: [:index, :create, :update, :destroy]
+      resources :deliverables, only: [:create, :update, :destroy]
+      resources :invoices, only: [:create]
     end
+    
+    resources :invoices, only: [:show, :index, :update, :destroy]
     
     post 'deliverables/:id/add_hour',
           to: 'deliverables#add_hour'
@@ -18,6 +21,5 @@ Rails.application.routes.draw do
       resources :hours, only: [:destroy]
     end
     
-    resources :invoices, only: [:index, :create, :update, :destroy, :show]
   end
 end
