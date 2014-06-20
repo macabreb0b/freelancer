@@ -7,7 +7,8 @@ Freelancer.Views.ShowInvoice = Backbone.View.extend({
   
   render: function() {
     var renderedContent = this.template({
-      invoice: this.model
+      invoice: this.model,
+      deliverables: this.model.deliverables()
     });
     this.$el.html(renderedContent);
     return this;

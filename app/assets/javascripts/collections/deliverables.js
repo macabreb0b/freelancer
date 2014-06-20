@@ -2,7 +2,12 @@
 
 Freelancer.Collections.Deliverables = Backbone.Collection.extend({
   initialize: function(models, options) {
-    this.project = options.project;
+    if(options.project) {
+      this.project = options.project;
+    }
+    if(options.invoice) {
+      this.invoice = options.invoice;
+    }
   },
   
   url: function() {
@@ -10,6 +15,4 @@ Freelancer.Collections.Deliverables = Backbone.Collection.extend({
   },
   
   model: Freelancer.Models.Deliverable
-  
-
 });

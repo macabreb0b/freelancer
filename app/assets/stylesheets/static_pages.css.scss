@@ -150,5 +150,10 @@ blockquote {
   color: #d9534f;
 }
 
-.invoice-table {
+.invoice-table .center {
+  text-align: center;
+
+}
+.invoice-table .center.total {
+  font-weight: 700;
 }

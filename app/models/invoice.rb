@@ -19,6 +19,7 @@ class Invoice < ActiveRecord::Base
   has_one :user, through: :project
   
   has_many :hours
+  has_many :deliverables, -> { uniq }, through: :hours
   
   def client_name
     client.name

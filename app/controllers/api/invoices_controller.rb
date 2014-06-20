@@ -20,7 +20,7 @@ class Api::InvoicesController < ApplicationController
   
   private
   
-  def invoice_params
-  end
+    def invoice_params
+    end
 end
   

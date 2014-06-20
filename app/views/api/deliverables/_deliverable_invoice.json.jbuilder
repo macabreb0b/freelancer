@@ -1,0 +1,11 @@
+json.name deliverable.name
+json.completed deliverable.completed
+json.id deliverable.id
+json.parent_deliverable_id deliverable.parent_deliverable_id
+json.project_id deliverable.project_id
+json.updated_at deliverable.updated_at
+json.created_at deliverable.created_at
+json.rank deliverable.rank
+json.collapsed deliverable.collapsed
+json.count deliverable.count_by_invoice(id)
+json.hourly deliverable.hourly

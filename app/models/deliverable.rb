@@ -36,7 +36,10 @@ class Deliverable < ActiveRecord::Base
     
   has_many :hours, 
         dependent: :destroy
-    
+
+  def count_by_invoice(id)
+    hours.where("hours.invoice_id = ?", id).count
+  end
     
   def all_children
     kids = self.children

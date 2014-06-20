@@ -18,6 +18,10 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
     return this._hours;
   },
   
+  total: function() {
+    return parseInt(this.get('count')) * parseInt(this.get('hourly'));
+  },
+  
   addHour: function() {
     var that = this;
     

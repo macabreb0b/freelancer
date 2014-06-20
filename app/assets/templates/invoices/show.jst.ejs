@@ -24,23 +24,33 @@
   <thead>
     <tr>
       <th class='col col-xs-7'>Description</th>
-      <th class='col-xs-2'>Hourly ($)</th>
-      <th class='col-xs-2'>Hours (#)</th>
-      <th class='col-xs-1'>Total</th>
+      <th class='col-xs-2 center'>Hourly ($)</th>
+      <th class='col-xs-2 center'>Hours (#)</th>
+      <th class='col-xs-1 center'>Total</th>
     </tr>
   </thead>
   <tbody>
+    <% var total = 0; %>
     <% if(typeof deliverables !== 'undefined') { %>
       <% deliverables.each(function(deliverable) { %>
+        <% total += deliverable.total() %>
         <tr>
           <td><%= deliverable.escape('name') %></td>
-          <td><%= deliverable.escape('hourly') %></td>
-          <td><%= deliverable.escape('hours') %></td>
-          <td><%= deliverable.total() %></td>
+          <td class='center after-x'>$<%= deliverable.escape('hourly') %></td>
+          <td class='center'><%= deliverable.escape('count') %></td>
+          <td class='center'>$<%= deliverable.total() %></td>
         </tr>
       <% }) %>
     <% } %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='3'></td>
+      <td class='center total'>
+        $<%= total %>
+      </td>
+    </tr>
+  </tfoot>
 </table>
 <a href="#/invoices/<%= invoice.id %>/edit">
   edit invoice</a>&nbsp;
