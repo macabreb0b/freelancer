@@ -9,8 +9,8 @@ Freelancer.Views.HoursDisplay = Backbone.View.extend({
   template: JST['projects/hours_display'],
   
   render: function() {
-    var disabled = !!(this.model.get('uninvoiced_hours_count') && 
-          this.model.get('uninvoiced_hours_count') < 1);
+    var disabled = this.model.escape('uninvoiced_hours_count') && 
+          this.model.escape('uninvoiced_hours_count') < 1;
     
     var renderedContent = this.template({
       total_hours: this.model.escape('total_hours'),

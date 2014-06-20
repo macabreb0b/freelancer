@@ -10,6 +10,9 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
       success: function(model) {
         that.hours().add(model);
         that.collection.trigger('add-hour');
+      },
+      error: function() {
+        alert('error adding hour!')
       }
     });
   },
@@ -51,7 +54,6 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
     
     if (hour) {
       hour.destroy({
-        wait: true,
         success: function() {
           deliverable.collection.trigger('remove-hour');
         }

@@ -48,7 +48,7 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   addHour: function(event) {
     event.stopPropagation();
-    
+    event.currentTarget.setAttribute('disabled', 'disabled')
     this.model.addHour();
   },
   
@@ -103,7 +103,7 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   removeHour: function(event) {
     event.stopPropagation();
-    
+    event.currentTarget.setAttribute('disabled', 'disabled')
     this.model.removeHour();
   },
   
