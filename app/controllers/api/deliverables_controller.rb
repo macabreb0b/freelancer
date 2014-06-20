@@ -41,7 +41,6 @@ module Api
       else
         render json: @deliverable.errors.full_messages, status: 422
       end
-      
     end
     
     def remove_hour
@@ -51,7 +50,7 @@ module Api
         hour.destroy
         render json: {}
       else
-        render json: @deliverable, status: 422
+        render json: @deliverable, status: 400
       end
     end
     

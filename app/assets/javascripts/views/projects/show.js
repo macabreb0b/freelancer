@@ -13,11 +13,6 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     this.resetSubviews();
   },
   
-  resetSubviews: function() {
-    this.removeSubviews('.deliverables');
-    this.model.deliverables().each(this.addDeliverable.bind(this));
-  },
-  
   events: {
     'click .delete-project': 'deleteProject',
     'submit .new-deliverable': 'newDeliverable',
@@ -35,6 +30,13 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
       });
       this.addSubview(selector, subview);
     }
+  },
+  
+  addHour: function() {
+    this.model.set('uninvoiced_hours_count', 
+        this.model.get('uninvoiced_hours_count') + 1);
+    this.model.set('total_hours', 
+        this.model.get('total_hours') + 1);
   },
   
   addHoursDisplay: function() {
@@ -92,6 +94,13 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     });
   },
   
+  removeHour: function() {
+    this.model.set('uninvoiced_hours_count', 
+        this.model.get('uninvoiced_hours_count') - 1);
+    this.model.set('total_hours', 
+        this.model.get('total_hours') - 1);
+  },
+  
   render: function() {
     var renderedContent = this.template({
       project: this.model,
@@ -103,17 +112,8 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     return this;
   },
   
-  addHour: function() {
-    this.model.set('uninvoiced_hours_count', 
-        this.model.get('uninvoiced_hours_count') + 1);
-    this.model.set('total_hours', 
-        this.model.get('total_hours') + 1);
-  },
-  
-  removeHour: function() {
-    this.model.set('uninvoiced_hours_count', 
-        this.model.get('uninvoiced_hours_count') - 1);
-    this.model.set('total_hours', 
-        this.model.get('total_hours') - 1);
+  resetSubviews: function() {
+    this.removeSubviews('.deliverables');
+    this.model.deliverables().each(this.addDeliverable.bind(this));
   }
 });

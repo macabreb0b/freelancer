@@ -33,15 +33,11 @@
   display: none;
 }
 
-.caret.caret-reversed {
-  border-top-width: 0;
-  border-bottom: 4px solid #000000;
-}
-
 .checkbox {
   width: 20px;
   height: 20px;
 }
+
 .checkbox.checked {
   background: image-url('checked.png');
   border-width: 0;
@@ -77,7 +73,7 @@
 }
 
 .completed {
-  color: gray;
+  color: lightgrey;
 }
 
 ul {
@@ -136,6 +132,13 @@ blockquote {
   padding: 5px;
   display: inline-block;
   margin-bottom: 0;
+  -moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .hours-display {
@@ -152,8 +155,8 @@ blockquote {
 
 .invoice-table .center {
   text-align: center;
-
 }
+
 .invoice-table .center.total {
   font-weight: 700;
 }

@@ -13,9 +13,9 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   className: function() {
     if(this.model.get('collapsed')) {
-      return 'deliverable collapsed'
+      return 'deliverable collapsed';
     } else {
-      return 'deliverable' 
+      return 'deliverable'; 
     }
   },
   
@@ -48,12 +48,13 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   addHour: function(event) {
     event.stopPropagation();
-    event.currentTarget.setAttribute('disabled', 'disabled')
+    event.currentTarget.setAttribute('disabled', 'disabled');
     this.model.addHour();
   },
   
   closeIt: function(event) {
     event.stopPropagation();
+    event.currentTarget.setAttribute('disabled', 'disabled');
 
     this.model.save({ completed: true }, {
       wait: true
@@ -71,7 +72,7 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.$el.find('.subdeliverables').first().slideUp('fast');
     var view = this;
     setTimeout(function() {
-      view.$el.addClass('collapsed')
+      view.$el.addClass('collapsed');
     }, 200);
     this.model.save({ collapsed: true });
   },
@@ -95,6 +96,7 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   openIt: function(event) {
     event.stopPropagation();
+    event.currentTarget.setAttribute('disabled', 'disabled');
 
     this.model.save({ completed: false }, {
       wait: true
@@ -103,13 +105,15 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   
   removeHour: function(event) {
     event.stopPropagation();
-    event.currentTarget.setAttribute('disabled', 'disabled')
+    event.currentTarget.setAttribute('disabled', 'disabled');
     this.model.removeHour();
   },
   
   removeTask: function(event) {
     event.preventDefault();
     event.stopPropagation();
+    event.currentTarget.setAttribute('disabled', 'disabled');
+    
     var view = this;
     
     this.model.destroy({
@@ -119,6 +123,7 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
       },
       error: function() {
         alert('cannot remove a completed deliverable!');
+        event.currentTarget.removeAttribute('disabled');
       }
     });
   },
@@ -150,7 +155,7 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.$el.find('.subdeliverables').first().slideDown('fast');
     var view = this;
     setTimeout(function() {
-      view.$el.removeClass('collapsed')
+      view.$el.removeClass('collapsed');
     }, 200);
     this.model.save({ collapsed: false });
   },
