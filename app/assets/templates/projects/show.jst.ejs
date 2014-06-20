@@ -31,27 +31,8 @@
 </button>
 
 <h4>hours:</h4>
-<div class='panel panel-primary hours-display'>
-  <div class='panel-heading'>
-    <h2 class='panel-title'>uninvoiced hours: 
-      <span class='uninvoiced'>
-        <%= project.escape('uninvoiced_hours') %>
-      </span>&nbsp;
-      <button class='make-invoice btn btn-sm btn-primary
-      <% if(project.escape('uninvoiced_hours') && project.escape('uninvoiced_hours') < 1) { %>
-      disabled
-      <% } %>'>
-        invoice&nbsp;
-        <span class='glyphicon glyphicon-send'></span>&nbsp;</button>
-    </h2>
-  </div>
+<div class='hours'>
   
-  <div class='panel-footer'>
-    total hours: 
-    <span class='total'>
-      <%= project.get('total_hours') %>
-    </span>
-  </div>
 </div>
 
 <h4>client:</h4>

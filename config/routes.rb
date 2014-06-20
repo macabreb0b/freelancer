@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     end
     
     resources :projects, only: [:index, :create, :update, :destroy, :show] do
+      post 'invoice', to: 'projects#invoice'
       resources :deliverables, only: [:create, :update, :destroy]
-      resources :invoices, only: [:create]
     end
     
     resources :invoices, only: [:show, :index, :update, :destroy]

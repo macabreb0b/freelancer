@@ -103,6 +103,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     this.mainView('.projects');
     this.waitingGif();
     var project = Freelancer.Collections.projects.getOrFetch(id);
+    project.fetch();
     var showView = new Freelancer.Views.ShowProject({
       model: project
     });

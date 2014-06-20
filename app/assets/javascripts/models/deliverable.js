@@ -30,7 +30,7 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
       method: 'post',
       success: function(model) {
         that.hours().add(model);
-        that.collection.trigger('update-hours', 'add');
+        that.collection.trigger('add-hour');
       }
     });
   },
@@ -44,7 +44,7 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
       hour.destroy({
         wait: true
       });
-      this.collection.trigger('update-hours', 'remove');
+      this.collection.trigger('remove-hour');
     } else {
       alert('no uninvoiced hours to remove!');
     } 

@@ -17,8 +17,7 @@
 class Deliverable < ActiveRecord::Base
   validates :project, :name, :rank, :presence => true
   validates :completed, :inclusion => { in: [true, false] }
-  before_validation :incomplete_by_default
-  before_validation :last_rank_by_default
+  before_validation :set_defaults
   
   belongs_to :project,
         inverse_of: :deliverables
@@ -47,20 +46,34 @@ class Deliverable < ActiveRecord::Base
     kids
   end
   
-  def incomplete_by_default
-    self.completed = false if self.completed.nil?
-    true # will not pass validation if it returns falsy value
-  end
   
-  def last_rank_by_default
-    if self.rank.nil?
-      if self.parent_deliverable
-        self.rank = self.parent_deliverable.children.count
-      else
-        self.rank = self.project.children.count
-      end
+  private
+    
+    def set_defaults
+      set_default_hourly && 
+          incomplete_by_default && 
+          last_rank_by_default
     end
-    true # will not pass validation if it returns falsy value
-  end
+    
+    def set_default_hourly
+      self.hourly = 50 if self.hourly.nil?
+      true
+    end
+    
+    def incomplete_by_default
+      self.completed = false if self.completed.nil?
+      true # will not pass validation if it returns falsy value
+    end
+  
+    def last_rank_by_default
+      if self.rank.nil?
+        if self.parent_deliverable
+          self.rank = self.parent_deliverable.children.count
+        else
+          self.rank = self.project.children.count
+        end
+      end
+      true # will not pass validation if it returns falsy value
+    end
 end
 

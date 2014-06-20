@@ -34,10 +34,25 @@ class Project < ActiveRecord::Base
   end
   
   def uninvoiced_hours
-    self.hours.where(:invoice_id => nil).count
+    self.hours.where(:invoice_id => nil)
+  end
+  
+  def uninvoiced_hours_count
+    uninvoiced_hours.count
   end
   
   def children
     deliverables.where(:parent_deliverable_id => nil)
+  end
+  
+  def invoice!
+    begin
+      invoice = Invoice.create({ paid: false, project_id: id, date: Time.now })
+      uninvoiced_hours.update_all(invoice_id: invoice.id)
+    rescue
+      false
+    else
+      invoice
+    end
   end
 end

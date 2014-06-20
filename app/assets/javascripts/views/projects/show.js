@@ -6,11 +6,11 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     this.listenTo(this.model.deliverables(), 'remove', this.resetSubviews);
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(Freelancer.Collections.clients, 'sync', this.render);
-    this.listenTo(this.model.deliverables(), 'update-hours', this.updateDisplay);
+    this.listenTo(this.model.deliverables(), 'add-hour', this.addHour);
+    this.listenTo(this.model.deliverables(), 'remove-hour', this.removeHour);
     
-    // this.model.deliverables().each(this.addDeliverable.bind(this));
+    this.addHoursDisplay();
     this.resetSubviews();
-    view = this;
   },
   
   resetSubviews: function() {
@@ -20,7 +20,8 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   
   events: {
     'click .delete-project': 'deleteProject',
-    'submit .new-deliverable': 'newDeliverable'
+    'submit .new-deliverable': 'newDeliverable',
+    'click .make-invoice': 'makeInvoice'
   },
   
   template: JST['projects/show'],
@@ -36,6 +37,13 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     }
   },
   
+  addHoursDisplay: function() {
+    var hoursDisplay = new Freelancer.Views.HoursDisplay({
+      model: this.model
+    });
+    this.addSubview('.hours', hoursDisplay);
+  },
+  
   deleteProject: function(event) {
     event.preventDefault();
     this.model.destroy({
@@ -47,6 +55,26 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
         });      
       }
     });
+  },
+  
+  makeInvoice: function(event) {
+    // show modal
+    this.waitingGif();
+    
+    $.ajax({
+      url: this.model.url() + '/invoice',
+      method: 'POST',
+      success: function(model, response) {
+        alert('success!');
+        Backbone.history.navigate('#/invoices/' + model.id, { 
+          trigger: true
+        })
+      },
+      error: function(model, response) {
+        // render error messages
+        debugger
+      }
+    })
   },
   
   newDeliverable: function(event) {
@@ -73,27 +101,30 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     return this;
   },
   
-  updateDisplay: function(addOrRemove) {
-    var $uninvoiced = this.$el.find('.uninvoiced');
-    var $total = this.$el.find('.total');
-    var uninvoiced = this.model.get('uninvoiced_hours');
-    var total = this.model.get('total_hours');
-    
-    if(addOrRemove == 'add') {
-      uninvoiced += 1
-      total += 1
-    } else {
-      uninvoiced -= 1
-      total -= 1
-    }
-    
-    this.model.set('uninvoiced_hours', uninvoiced);
-    this.model.set('total_hours', total);
-    $uninvoiced.text(uninvoiced)
-    $total.text(total)
+  addHour: function() {
+    this.model.set('uninvoiced_hours_count', 
+        this.model.get('uninvoiced_hours_count') + 1);
+    this.model.set('total_hours', 
+        this.model.get('total_hours') + 1);
+  },
+  
+  removeHour: function() {
+    this.model.set('uninvoiced_hours_count', 
+        this.model.get('uninvoiced_hours_count') - 1);
+    this.model.set('total_hours', 
+        this.model.get('total_hours') - 1);
+  },
+  
+  waitingGif: function() {
+    this.$el.html('<div id="canvasloader"></div>');
+    var cl = new CanvasLoader('canvasloader');
+    cl.setColor('#e01234'); // default is '#000000'
+    cl.setShape('spiral'); // default is 'oval'
+    cl.setDiameter(58); // default is 40
+    cl.setDensity(95); // default is 40
+    cl.setRange(1); // default is 1.3
+    cl.setSpeed(4); // default is 2
+    cl.setFPS(49); // default is 24
+    cl.show(); // Hidden by default
   }
-  
- 
-  
-
 });

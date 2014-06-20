@@ -33,6 +33,16 @@ module Api
       render json: {}
     end
     
+    def invoice
+      @project = Project.find(params[:project_id])
+      
+      if invoice = @project.invoice!
+        render json: invoice, status: 200
+      else
+        render json: "Oh no! We could not invoice right now.".to_json, status: 400
+      end
+    end
+    
     def update
       @project = Project.find(params[:id])
 
