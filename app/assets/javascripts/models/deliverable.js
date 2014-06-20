@@ -54,6 +54,7 @@ Freelancer.Models.Deliverable = Backbone.Model.extend({
     
     if (hour) {
       hour.destroy({
+        wait: true,
         success: function() {
           deliverable.collection.trigger('remove-hour');
         }
