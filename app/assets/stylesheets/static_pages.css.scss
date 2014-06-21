@@ -19,6 +19,18 @@ body, html {
   position: relative;
 }
 
+.navbar-btn.btn-sm.my-btn {
+  color: white;
+  background: none;
+  border: white thin solid;
+}
+
+.navbar-btn.btn-sm.my-btn:hover {
+  color: #F5302F;
+  background: white;
+  border: #F5302F thin solid;
+}
+
 .navbar > .container .navbar-brand.logo:before {
   position: absolute;
   background: image-url('spin-logo.png') left center no-repeat;
