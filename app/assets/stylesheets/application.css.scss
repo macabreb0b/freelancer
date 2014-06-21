@@ -13,6 +13,20 @@
  *= require_tree .
  *= require_self
  */
+$body-bg: #FFD4B5;
+// danger #E80A01
+// primary 670CFF
+// warning FFAE0C
+// success 75C708
+// lightblue 0BCEF5
+$brand-primary:         #E86C38 !default;
+$brand-success:         #75C708 !default;
+$brand-info:            #37B0C7 !default;
+$brand-warning:         #FFAE0C !default;
+$brand-danger:          #E80A01 !default;
+
+$gray-light:             lighten(#000, 10%);   // #999
+
 
 @import "bootstrap";
 @font-face {

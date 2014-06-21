@@ -2,13 +2,52 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body, html {
+  height: 100%;
+}
 
+.navbar.redbar {
+  background-color: #F5302F;
+  margin-bottom: 0;
+  a {
+    color: white;
+  }
+}
+
+.navbar > .container .navbar-brand.logo {
+  margin-left: 80px;
+  position: relative;
+}
+
+.navbar > .container .navbar-brand.logo:before {
+  position: absolute;
+  background: image-url('spin-logo.png') left center no-repeat;
+  left: -23px;
+  top: 8px;
+  background-size: 33px 33px;
+  width: 33px;
+  height: 33px;
+  content: ""; 
+  display: inline-block; 
+   
+}
+
+.navbar > .container .navbar-brand.logo:hover:before {
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  transition: 300ms;
+}
+
+
+header .container {
+  max-width: 1000px;
+}
 
 #content {
-  width: 800px;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  min-height: 500px;
+  position:relative;
 }
 
 #content::after {
@@ -59,16 +98,64 @@
 }
 
 #display {
-  float: left;
-  width: 600px;
+  position: absolute;
+  z-index: 2;
+  left: 100px;
+  width: 900px;
+  padding: 10px;
+  border-left: thick solid #E86C38;
+  border-right: thick solid #E86C38;
+//  background: rgb(243, 245, 247);
+  background: lightgrey;
+  overflow: hidden;
+  overflow-y: auto;
+  > div {
+    background: white;
+    padding: 10px;
+    border: thin solid #cecece;
+  }
+  > div#canvasloader {
+    border: none;
+    background: none;
+    
+  }
 }
 
 #sidebar {
-  width: 200px;
-  float: left;
+  width: 150px;
   height: 100%;
+  position: relative;
   ul {
-    width: 180px;
+    position: absolute;
+    width: 160px;
+    top: 30px;
+    left: 30px;
+    z-index: 0;
+    
+    > li {
+      transform: rotate(-10deg);
+      -webkit-transform: rotate(-10deg);
+    }
+
+    > li > a {
+      border-radius: 5px 0 0 5px;
+      border: thin solid white;
+      background-color: white;
+      border-right: none;
+      transition: 200ms ease;
+      
+    }
+    > li.active > a, > li > a:hover {
+      transform: translate(-50px);
+      -webkit-transform: translate(-50px);
+      transition: 200ms ease;
+    }
+    > li.active > a {
+      background-color: #E86C38;
+      color: white;
+      border: thin solid #E86C38;
+      border-right: none;
+    }
   }
 }
 

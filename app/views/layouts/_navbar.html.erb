@@ -1,8 +1,8 @@
 <header>
-  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <nav class="navbar navbar-static-top redbar" role="navigation">
     <div class="container">
       <!-- <h1>Freelancer</h1> -->
-      <a class='navbar-brand' href="/#">Freelancer</a>
+      <a class='navbar-brand logo' href="/#">Freelancer</a>
       <% if !current_user %>
         <%= button_to 'Sign In',
           new_user_session_path,
@@ -20,6 +20,4 @@
       <% end %>
     </div>
   </nav>
-  
-  
 </header>
