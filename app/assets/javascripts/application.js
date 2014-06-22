@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require heartcode-canvasloader-min
 //= require underscore
+//= require date.format
 //= require backbone
 //= require freelancer
 //= require_tree ../templates

@@ -3,10 +3,16 @@
   <li class="active">invoices</li>
 </ol>
 <h1>All Invoices</h1>
+
 <ul>
   <% invoices.each(function(invoice) { %>
     <li>
-      <%= invoice.escape('date') %> <a href="#/invoices/<%= invoice.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
+      <% var project = projects.get(invoice.get('project_id')) %>
+      <% if(typeof project !== 'undefined') { %>
+        <%= project.escape('name') %>
+      <% } %>
+      &nbsp;-&nbsp;
+      <%= dateFormat(invoice.escape('date'), "m/dd/yy") + ' - (' + invoice.id + ')' %> <a href="#/invoices/<%= invoice.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
     </li>
   <% }) %>
 </ul>

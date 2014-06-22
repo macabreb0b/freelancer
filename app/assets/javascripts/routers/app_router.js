@@ -146,8 +146,8 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
   
   invoicesIndex: function() {
     this.mainView('.invoices');
-
     var router = this;
+    Freelancer.Collections.projects.fetch();
     
     Freelancer.Collections.invoices.fetch({
       wait: true,
