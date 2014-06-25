@@ -1,4 +1,4 @@
-json.(project, :id, :name, :open, :description, :total_hours, :uninvoiced_hours_count, :client_id, :created_at, :updated_at)
+json.(project, :id, :name, :open, :description, :total_hours, :uninvoiced_hours_count, :client_id, :created_at, :updated_at, :hourly)
 
 
 json.deliverables(project.deliverables) do |deliverable|

@@ -14,5 +14,10 @@ class Hour < ActiveRecord::Base
   
   belongs_to :deliverable
   belongs_to :invoice
-
+  
+  before_destroy :must_not_have_invoice_id
+  
+  def must_not_have_invoice_id
+    invoice_id.nil?
+  end
 end

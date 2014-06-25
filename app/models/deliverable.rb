@@ -35,15 +35,21 @@ class Deliverable < ActiveRecord::Base
     
   has_many :hours, 
         dependent: :destroy
+        
+
 
   def count_by_invoice(id)
     hours.where("hours.invoice_id = ?", id).count
   end
     
   def all_children
-    kids = self.children
+    kids = self.children.map { |child| }
     self.children.each { |child| kids += child.all_children }
     kids
+  end
+  
+  def has_completed_children?
+    completed || all_children.any?(&:completed)
   end
   
   
@@ -56,7 +62,7 @@ class Deliverable < ActiveRecord::Base
     end
     
     def set_default_hourly
-      self.hourly = 50 if self.hourly.nil?
+      self.hourly = self.project.hourly if self.hourly.nil?
       true
     end
     

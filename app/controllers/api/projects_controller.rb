@@ -29,8 +29,12 @@ module Api
     
     def destroy
       @project = Project.find(params[:id])
-      @project.destroy
-      render json: {}
+      
+      if @project.destroy
+        render json: {}
+      else
+        render json: @project.errors.full_messages, status: 422
+      end
     end
     
     def invoice
@@ -55,7 +59,8 @@ module Api
 
     private
       def project_params
-        params.require(:project).permit(:name, :description, :open, :client_id)
+        params.require(:project)
+              .permit(:name, :description, :open, :client_id, :hourly)
       end
   end
 end

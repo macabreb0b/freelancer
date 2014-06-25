@@ -107,7 +107,7 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
       client: Freelancer.Collections.clients.getOrFetch(this.model.get('client_id'))
     });
     this.$el.html(renderedContent);
-    
+    $('#hourly').tooltip();
     this.attachSubviews();
     return this;
   },

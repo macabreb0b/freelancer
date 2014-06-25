@@ -48,7 +48,7 @@ Backbone.View.prototype.spinner = function(selector) {
   $target.html('<div id="canvasloader"></div>')
   
   var cl = new CanvasLoader('canvasloader');
-  cl.setColor('#e01234'); // default is '#000000'
+  cl.setColor('#F5302F'); // default is '#000000'
   cl.setShape('spiral'); // default is 'oval'
   cl.setDiameter(58); // default is 40
   cl.setDensity(95); // default is 40

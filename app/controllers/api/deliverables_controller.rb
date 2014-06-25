@@ -13,7 +13,8 @@ module Api
     
     def destroy
       @deliverable = Deliverable.find(params[:id])
-      unless @deliverable.all_children.any?(&:completed)
+      
+      unless @deliverable.has_completed_children?
         @deliverable.destroy
         render json: {}
       else
@@ -67,10 +68,10 @@ module Api
     end
     
     private
-    def deliverable_params
-      params.require(:deliverable)
-            .permit(:name, :hourly, :completed, 
-            :parent_deliverable_id, :project_id, :rank, :collapsed)
-    end
+      def deliverable_params
+        params.require(:deliverable)
+              .permit(:name, :hourly, :completed, 
+              :parent_deliverable_id, :project_id, :rank, :collapsed)
+      end
   end
 end

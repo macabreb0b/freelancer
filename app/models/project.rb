@@ -13,7 +13,7 @@
 #
 
 class Project < ActiveRecord::Base
-  validates :user, :client, :name, presence: true
+  validates :user, :client, :name, :hourly, presence: true
   validates :open, :inclusion => { in: [true, false] }
 
   belongs_to :user

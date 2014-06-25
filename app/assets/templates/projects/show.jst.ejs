@@ -35,6 +35,13 @@
   
 </div>
 
+<h4>default hourly:</h4>
+<span id='hourly'
+  data-toggle="tooltip" 
+  data-placement="right" 
+  title="Change your rate for individual deliverables by clicking the $ below">
+$<%= project.escape('hourly') %>.00</span>
+
 <h4>client:</h4>
   <% if(client) { %>
     <%= client.escape('name') %>
