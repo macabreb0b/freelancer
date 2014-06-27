@@ -57,16 +57,6 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
     });
   },
   
-  showClient: function(id) {
-    this.mainView('.clients');
-    
-    var client = Freelancer.Collections.clients.getOrFetch(id);
-    var showView = new Freelancer.Views.ShowClient({
-      model: client
-    });
-    this.swapDisplay(showView);
-  },
-  
   editClient: function(id) {
     this.mainView('.clients');
     
@@ -98,16 +88,30 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
       }
     });
   },
+  
+  showClient: function(id) {
+    this.mainView('.clients');
+    
+    var client = Freelancer.Collections.clients.getOrFetch(id);
+    var showView = new Freelancer.Views.ShowClient({
+      model: client
+    });
+    this.swapDisplay(showView);
+  },
     
   showProject: function(id) {
     this.mainView('.projects');
+    var router = this;
 
     var project = Freelancer.Collections.projects.getOrFetch(id);
-    project.fetch();
-    var showView = new Freelancer.Views.ShowProject({
-      model: project
+    project.fetch({ 
+      success: function() {
+        var showView = new Freelancer.Views.ShowProject({
+          model: project
+        });
+        router.swapDisplay(showView);
+      }
     });
-    this.swapDisplay(showView);
   },
   
   editProject: function(id) {

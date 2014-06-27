@@ -12,7 +12,7 @@
         <%= project.escape('name') %>
       <% } %>
       &nbsp;-&nbsp;
-      <%= dateFormat(invoice.escape('date'), "m/dd/yy") + ' - (' + invoice.id + ')' %> <a href="#/invoices/<%= invoice.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
+      <%= invoice.date() %> <a href="#/invoices/<%= invoice.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
     </li>
   <% }) %>
 </ul>

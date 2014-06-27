@@ -24,7 +24,7 @@ module Api
   
     def index
       @clients = current_user.clients
-
+      
       unless @clients.empty?
         render 'index.json.jbuilder'
       end

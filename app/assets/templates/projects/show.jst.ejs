@@ -29,12 +29,6 @@
   class='delete-project btn btn-sm btn-default'>
   delete project
 </button>
-
-<h4>hours:</h4>
-<div class='hours'>
-  
-</div>
-
 <h4>default hourly:</h4>
 <span id='hourly'
   data-toggle="tooltip" 
@@ -42,9 +36,26 @@
   title="Change your rate for individual deliverables by clicking the $ below">
 $<%= project.escape('hourly') %>.00</span>
 
+<h4>hours:</h4>
+<div class='hours'>
+</div>
+
+<h4>invoices:</h4>
+<% project.invoices().each(function(invoice) { %>
+  <%= invoice.date() %>
+  <a href="#/invoices/<%= invoice.id %>">
+    <span 
+      class='take-me-there 
+      glyphicon glyphicon-circle-arrow-right'></span></a><br>
+<% })%>
+
 <h4>client:</h4>
   <% if(client) { %>
     <%= client.escape('name') %>
+    <a href='#/clients/<%= client.id %>'>
+    <span 
+      class='take-me-there 
+      glyphicon glyphicon-circle-arrow-right'></span></a>
   <% } else { %> 
     loading client...
   <% } %>

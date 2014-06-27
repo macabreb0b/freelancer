@@ -16,5 +16,10 @@ Freelancer.Models.Invoice = Backbone.Model.extend({
         invoice: this
       });
     return this._deliverables;
+  },
+  
+  date: function() {
+    var model = this;
+    return dateFormat(model.escape('date'), "m/dd/yy") + ' - (' + this.id + ')';
   }
 });

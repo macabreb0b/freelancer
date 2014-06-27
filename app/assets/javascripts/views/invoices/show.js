@@ -2,6 +2,7 @@
 Freelancer.Views.ShowInvoice = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
+    
   },
   
   template: JST['invoices/show'],
@@ -25,7 +26,7 @@ Freelancer.Views.ShowInvoice = Backbone.View.extend({
       },
       error: function(model, response) {
         alert('error!');
-        debugger;
+        // debugger;
       }
     });
   },
@@ -33,7 +34,8 @@ Freelancer.Views.ShowInvoice = Backbone.View.extend({
   render: function() {
     var renderedContent = this.template({
       invoice: this.model,
-      deliverables: this.model.deliverables()
+      deliverables: this.model.deliverables(),
+      project: this.project
     });
     this.$el.html(renderedContent);
     return this;
