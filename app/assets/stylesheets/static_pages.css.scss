@@ -293,4 +293,10 @@ blockquote {
   font-size: 2em;
   color: #888888;
   padding: 50px;
+  a {
+    font-weight:700;
+  }
+  a:hover {
+    text-decoration: none;
+  }
 }
