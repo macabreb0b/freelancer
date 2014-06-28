@@ -3,6 +3,10 @@ Freelancer.Collections.Invoices = Backbone.Collection.extend({
     if(options && options.project) { this.project = options.project };
   },
   
+  comparator: function(thing) {
+    return -thing.id
+  },
+  
   url: 'api/invoices',
   
   model: Freelancer.Models.Invoice

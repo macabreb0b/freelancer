@@ -29,16 +29,17 @@
   class='delete-project btn btn-sm btn-default'>
   delete project
 </button>
-<h4>default hourly:</h4>
-<span id='hourly'
-  data-toggle="tooltip" 
-  data-placement="right" 
-  title="Change your rate for individual deliverables by clicking the $ below">
-$<%= project.escape('hourly') %>.00</span>
 
 <h4>hours:</h4>
 <div class='hours'>
 </div>
+
+<h4>hourly rate:</h4>
+<span id='hourly'
+  data-toggle="tooltip" 
+  data-placement="right" 
+  title="you are worth it!">
+$<%= project.escape('hourly') %>.00</span>
 
 <h4>invoices:</h4>
 <% project.invoices().each(function(invoice) { %>

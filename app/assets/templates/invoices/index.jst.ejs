@@ -4,18 +4,77 @@
 </ol>
 <h1>All Invoices</h1>
 
-<ul>
-  <% invoices.each(function(invoice) { %>
-    <li>
-      <% var project = projects.get(invoice.get('project_id')) %>
-      <% if(typeof project !== 'undefined') { %>
-        <%= project.escape('name') %>
-      <% } %>
-      &nbsp;-&nbsp;
-      <%= invoice.date() %> <a href="#/invoices/<%= invoice.id %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
-    </li>
-  <% }) %>
-</ul>
+<table class='table invoices'>
+  <thead>
+    <tr>
+      <th class='col-sm-2'>
+        <a href='#' 
+          class='sort-id sort-col sort-selected'
+          ><span 
+            class='glyphicon glyphicon-sort'></span></a>
+        Invoice No.
+      </th>
+      <th class='col-sm-2'>
+        <a href='#' 
+          class='sort-date sort-col'
+          ><span class='glyphicon glyphicon-sort'></span></a>
+        Date
+      </th>
+      <th class='col-sm-6'>
+        <a href='#' 
+          class='sort-project sort-col'
+          ><span class='glyphicon glyphicon-sort'></span></a>
+        Project Name
+      </th>
+      <th class='col-sm-1'>
+        <span class='pull-right'>
+          <a href='#' 
+          class='sort-total sort-col'
+          ><span class='glyphicon glyphicon-sort'></span></a>
+        Total</span>
+      </th>
+      <th class='col-sm-1'>
+        <a href='#' 
+          class='sort-paid sort-col'
+          ><span class='glyphicon glyphicon-sort'></span></a>
+        Paid
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% invoices.each(function(invoice) { %>
+      <tr>
+        <td>
+          <%= invoice.id %> 
+          <a href="#/invoices/<%= invoice.id %>"
+            ><span class='take-me-there glyphicon
+                  glyphicon-circle-arrow-right'></span></a>
+        </td>
+        
+        <td>
+          <%= invoice.date() %> 
+        </td>
+        
+        <td>
+        <% var project = projects.get(invoice.get('project_id')) %>
+
+          <% if(typeof project !== 'undefined') { %>
+            <%= project.escape('name') %>
+          <% } %>
+        </td>
+        
+        <td>
+          <span class='pull-right'>
+            $<%= invoice.total() %></span>
+        </td>
+
+        <td>
+          <%= invoice.get('paid') %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
 
 <!-- <a href="#/invoices/new">
   add a new invoice

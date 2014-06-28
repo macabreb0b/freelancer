@@ -270,3 +270,16 @@ blockquote {
   background-color: #cecece;
   border-color: #999999;
 }
+
+
+.invoices .sort-col > span.glyphicon-sort {
+  color: #cecece;
+}
+
+.invoices .sort-col.sort-selected > span.glyphicon-sort {
+  color: #E86C38; //brand-primary
+}
+
+.table.invoices td {
+  padding-left: 26px;
+}

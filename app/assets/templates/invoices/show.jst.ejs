@@ -30,10 +30,8 @@
     </tr>
   </thead>
   <tbody>
-    <% var total = 0; %>
     <% if(typeof deliverables !== 'undefined') { %>
       <% deliverables.each(function(deliverable) { %>
-        <% total += deliverable.total() %>
         <tr>
           <td><%= deliverable.escape('name') %></td>
           <td class='center after-x'>$<%= deliverable.escape('hourly') %></td>
@@ -47,7 +45,7 @@
     <tr>
       <td colspan='3'></td>
       <td class='center total'>
-        $<%= total %>
+        $<%= invoice.total() %>
       </td>
     </tr>
   </tfoot>
