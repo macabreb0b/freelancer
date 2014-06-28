@@ -2,7 +2,6 @@
 Freelancer.Views.ShowInvoice = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model, 'sync', this.render);
-    
   },
   
   template: JST['invoices/show'],
@@ -32,6 +31,14 @@ Freelancer.Views.ShowInvoice = Backbone.View.extend({
   },
   
   render: function() {
+    
+    // fetch project and listen for sync
+    if(this.model.get('project_id') && !this.project) {
+      this.project = Freelancer.Collections.projects
+            .getOrFetch(this.model.get('project_id'));
+      this.listenToOnce(this.project, 'sync', this.render);
+    }
+    
     var renderedContent = this.template({
       invoice: this.model,
       deliverables: this.model.deliverables(),
