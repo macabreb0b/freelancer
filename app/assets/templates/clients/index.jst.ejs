@@ -11,6 +11,12 @@
   <% }) %>
 </ul>
 
-<a href="#/clients/new">
-  add a new client
-</a>
+<% if(clients.length < 1) { %>
+  <div class='get-to-work'>
+    There's nothing here. <a href='#/clients/new'>Get working!</a>
+  </div>
+<% } else { %>
+  <a href="#/clients/new">
+    add a new client
+  </a>
+<% } %>

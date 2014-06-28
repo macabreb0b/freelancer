@@ -76,6 +76,12 @@
   </tbody>
 </table>
 
+<% if(invoices.length < 1) { %>
+  <div class='get-to-work'>
+    There's nothing here. <a href='#/projects'>Get working!</a>
+  </div>
+<% } %>
+
 <!-- <a href="#/invoices/new">
   add a new invoice
 </a> -->
