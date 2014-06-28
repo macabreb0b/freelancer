@@ -203,7 +203,7 @@ Freelancer.Routers.AppRouter = Backbone.Router.extend({
       this._currentSection = section;
       var $sidebar = this.mainView().$el.find('#sidebar');
       $sidebar.find('li').removeClass('active');
-      $sidebar.find(section).first().addClass('active');
+      $sidebar.find(section).addClass('active');
     }
   }
 });

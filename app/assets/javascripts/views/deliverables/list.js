@@ -154,6 +154,8 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     event.stopPropagation();
     this.$el.find('.subdeliverables').first().slideDown('fast');
     var view = this;
+    
+    // wait for slideDown action to show before removing class
     setTimeout(function() {
       view.$el.removeClass('collapsed');
     }, 200);

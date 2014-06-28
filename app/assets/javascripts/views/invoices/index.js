@@ -5,6 +5,7 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     this.listenTo(Freelancer.Collections.projects, 'sync', this.render);
     this.listenTo(this.collection, 'sort', this.render);
     
+    this.collection.sort();
     this.sortedBy = 'id';
     this.reverse = false;
   },
@@ -51,9 +52,9 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     this.collection.models = 
           _.sortBy(this.collection.models, function(thing) {
       if(view.reverse) {
-        return new Date(thing.get('date')) * -1;
+        return new Date(thing.get('date'));
       } else {
-        return new Date(thing.escape('date'));
+        return new Date(thing.escape('date')) * -1;
       }
     });
     
@@ -139,9 +140,9 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     this.collection.models = 
           _.sortBy(this.collection.models, function(thing) {
       if(view.reverse) {
-        return -thing.total();
-      } else {
         return thing.total();
+      } else {
+        return -thing.total();
       }
     });
     
