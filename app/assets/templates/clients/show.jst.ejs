@@ -12,10 +12,11 @@
 <ul>
   <% client.projects().each(function(project) { %>
     <li>
-      <a href="#/projects/<%= project.id %>">
+      
         <%= project.escape('name') %> 
-        <span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span>
-      </a>
+        <a href="#/projects/<%= project.id %>">
+          <span class='take-me-there glyphicon glyphicon-circle-arrow-right'>
+          </span></a>
     </li>
   <% }) %>
   <li>

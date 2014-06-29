@@ -1,17 +1,92 @@
-<h2>Sign in</h2>
+<div id='registration-content'>
+  <div class='col-sm-offset-2 col-sm-10'>
+    <h2>Sign in</h2>
+  </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <form 
+    accept-charset="UTF-8" 
+    action="<%= new_user_session_url %>" 
+    class="new_user form-horizontal" 
+    id="new_user" 
+    method="post"
+    role='form'>
+  
+    <div style="display:none">
+      <input 
+        name="utf8" 
+        type="hidden" 
+        value="✓">
+      <input 
+        name="authenticity_token" 
+        type="hidden" 
+        value="<%= form_authenticity_token %>">
+    </div>
+  
+    <div class='form-group'>
+      <label class='col-sm-2 control-label' for="user_email">
+        Email
+      </label>
+      <div class='col-sm-10'>
+        <input 
+          class='form-control'
+          autofocus="autofocus" 
+          id="user_email" 
+          name="user[email]" 
+          placeholder='Enter your email'
+          type="email" 
+          value="<%= @user.email %>">
+      </div>
+    </div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+    <div class='form-group'>
+      <label class='col-sm-2 control-label' for="user_password">
+        Password
+      </label>
+      <div class='col-sm-10'>
+        <input 
+          class='form-control'
+          autocomplete="off" 
+          placeholder='Enter your password'
+          id="user_password" 
+          name="user[password]" 
+          type="password">
+      </div>
+    </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+    <% if devise_mapping.rememberable? -%>
+      <div class='form-group'>
+        <div class='col-sm-offset-2 col-sm-10'>
+          <div class='checkbox'>
+            <input 
+              name="user[remember_me]" 
+              type="hidden" 
+              value="0">
+            <label>
+              <input 
+                id="user_remember_me" 
+                name="user[remember_me]" 
+                type="checkbox" 
+                value="1"> 
+                Remember me
+            </label>
+          </div>
+        </div>
+      </div>
+    <% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <input 
+          class='btn btn-primary'
+          name="commit" 
+          type="submit" 
+          value="Sign in">
+      </div>
+    </div>
 
-<%= render "devise/shared/links" %>
+  </form>
+
+  <div class='col-sm-offset-2 col-sm-10'>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

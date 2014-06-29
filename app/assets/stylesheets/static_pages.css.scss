@@ -55,7 +55,7 @@ header .container {
   max-width: 1000px;
 }
 
-#content {
+#content, #registration-content {
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -84,19 +84,19 @@ header .container {
   display: none;
 }
 
-.checkbox {
+.deliverable-checkbox {
   width: 20px;
   height: 20px;
 }
 
-.checkbox.checked {
+.deliverable-checkbox.checked {
   background: image-url('checked.png');
   border-width: 0;
   background-size: cover;
   margin: 5px;
 }
 
-.checkbox.unchecked {
+.deliverable-checkbox.unchecked {
   background: image-url('unchecked.png');
   border-width: 0;
   background-size: cover;
@@ -299,4 +299,8 @@ blockquote {
   a:hover {
     text-decoration: none;
   }
+}
+
+#error_explanation {
+  
 }

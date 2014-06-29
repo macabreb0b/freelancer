@@ -9,8 +9,19 @@
   </head>
   <body>
     <%= render partial: 'layouts/navbar' %>
-    <% if notice %><p class="notice"><%= notice %></p><% end %>
-    <% if alert %><p class="alert"><%= alert %></p><% end %>
+    <% if notice %>
+      <div class="notice alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Wow!</strong> <%= notice %>
+      </div>
+    <% end %>
+  
+    <% if alert %>
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Whoa there!</strong> <%= alert %>
+      </div>
+    <% end %>
 
     <div class='container'>
       <%= yield %>
