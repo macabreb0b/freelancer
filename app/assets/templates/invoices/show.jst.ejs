@@ -1,21 +1,25 @@
 <ol class='breadcrumb'>
   <li><a href="#/">home</a></li>
+  <li><a href="#/projects">projects</a></li>
+  <li><a href='#/projects<% if(typeof project !== 'undefined') { %>
+    <%= project.id %>/'><%= project.escape('name').toLowerCase() %></a>
+    <% } else { %>
+      '>project</a>
+    <% }%></li>
   <li><a href="#/invoices">invoices</a></li>
-  <li class='active'><%= invoice.escape('date')%></li>
+  <li class='active'><%= invoice.id %></li>
 </ol>
 
-<h2><%= invoice.escape('date') %></h2>
-<h4>project:</h4>
+<h2>Invoice No. <%= invoice.id %></h2>
+<h4>date:</h4>
+<%= invoice.date() %>
 
-<% if(typeof project !== 'undefined') { %>
-  <%= project.escape('name') %>
-<% } else { %>
-  go to project
-<% }%>
-<a href="#/projects/<%= invoice.escape('project_id') %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
+<a href="#/projects/<%= invoice.escape('project_id') %>"
+  ><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
 <h4>invoice to:</h4>
 <%= invoice.escape('client_name') %>
-<a href="#/clients/<%= invoice.escape('client_id') %>"><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a><br>
+<a href="#/clients/<%= invoice.escape('client_id') %>"
+  ><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a><br>
 <%= invoice.escape('client_phone') %><br>
 <%= invoice.escape('client_email') %><br>
 <br>

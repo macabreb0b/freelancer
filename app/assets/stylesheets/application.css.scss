@@ -44,3 +44,13 @@ pre {
 .alert {
   margin-bottom: 0;
 }
+
+.static-alert {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(214,233,198, 0.8);
+  padding: 50px;
+}
