@@ -23,6 +23,8 @@ class Invoice < ActiveRecord::Base
   has_many :hours
   has_many :deliverables, -> { uniq }, through: :hours
   
+  
+  # remove these in favor of client fetch on invoice#show
   def client_name
     client.name
   end
@@ -36,6 +38,6 @@ class Invoice < ActiveRecord::Base
   end
   
   def set_number
-    self.number ||= user.invoices.count
+    self.number ||= user.invoices.last.number + 1
   end
 end
