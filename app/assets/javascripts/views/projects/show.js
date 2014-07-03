@@ -69,7 +69,7 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
       url: this.model.url() + '/invoice',
       method: 'POST',
       success: function(model, response) {
-        alert('success!');
+        // alert('success!');
         Backbone.history.navigate('#/invoices/' + model.id, { 
           trigger: true
         })

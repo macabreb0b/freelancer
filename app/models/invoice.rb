@@ -11,8 +11,10 @@
 #
 
 class Invoice < ActiveRecord::Base
-  validates :date, :project, :presence => true
+  validates :date, :project, :number, :presence => true
   validates :paid, inclusion: { in: [true, false] }
+  before_validation :set_number
+  
   
   belongs_to :project
   has_one :client, through: :project
@@ -31,5 +33,9 @@ class Invoice < ActiveRecord::Base
   
   def client_phone
     client.phone
+  end
+  
+  def set_number
+    self.number ||= user.invoices.count
   end
 end

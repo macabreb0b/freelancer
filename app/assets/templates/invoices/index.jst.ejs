@@ -45,7 +45,7 @@
     <% invoices.each(function(invoice) { %>
       <tr>
         <td>
-          <%= invoice.id %> 
+          <%= invoice.get('number') %> 
           <a href="#/invoices/<%= invoice.id %>"
             ><span class='take-me-there glyphicon
                   glyphicon-circle-arrow-right'></span></a>

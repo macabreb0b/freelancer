@@ -7,10 +7,10 @@
       '>project</a>
     <% }%></li>
   <li><a href="#/invoices">invoices</a></li>
-  <li class='active'><%= invoice.id %></li>
+  <li class='active'><%= invoice.get('number') %></li>
 </ol>
 
-<h2>Invoice No. <%= invoice.id %></h2>
+<h2>Invoice No. <%= invoice.get('number') %></h2>
 <h4>date:</h4>
 <%= invoice.date() %>
 
