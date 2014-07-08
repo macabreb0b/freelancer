@@ -9,6 +9,7 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
     this.listenTo(this.model.deliverables(), 'add-hour', this.addHour);
     this.listenTo(this.model.deliverables(), 'remove-hour', this.removeHour);
     
+    // this.addDeliverableDetail();
     this.addHoursDisplay();
     this.resetSubviews();
   },

@@ -1,36 +1,71 @@
-<div 
-  class='modal-fade' 
-  id="deliverable-detail" 
-  tabindex="-1" 
-  role="dialog" 
-  aria-labelledby="myModalLabel" 
-  aria-hidden="true">
+<div class="modal-content">
+  <!-- <div class="modal-header">
+
+  </div> -->
   
-  <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button 
-            type="button" 
-            class="close" 
-            data-dismiss="modal">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-          <h4 class="modal-title" id="deliverable-title">
-            <%= deliverable.get('name') %>
-          </h4>
-        </div>
-        <div class="modal-body">
-          description?
-          <br>
-          hourly
-          <br>
-          click-to-edit
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
-        </div>
+  <div class="modal-body">
+    
+    <button 
+      type="button" 
+      class="close" 
+      data-dismiss="modal">
+        <span aria-hidden="true" class='glyphicon glyphicon-remove'></span>
+        <span class="sr-only">Close</span>
+      </button>
+      
+    
+    
+    <h4 class="modal-title" id="deliverable-title">
+      <% if(deliverable.get('completed')) { %>
+        <button 
+          class='deliverable-checkbox checked btn btn-sm btn-default'>
+        </button>  
+      <% } else { %>
+        <button 
+          class='unchecked deliverable-checkbox btn btn-sm btn-default'>
+        </button>
+      <% } %>
+      <span class='deliverable-title'>
+        <%= deliverable.escape('name') %></span>
+    </h4>
+    
+    
+    
+    <div class='deliverable-details'>
+      
+      <h4>hourly rate:</h4>
+      $<%= deliverable.escape('hourly') %>.00
+    
+      <h4>hours:</h4>
+      <div class='panel panel-warning panel-hours'>
+        <button
+          class='remove-hour btn btn-sm btn-warning 
+          <% if(deliverable.get('completed')) {%> disabled <% }%>
+          <% if(!removable) { %> greyed-out disabled <% } %>'>
+          <span class='glyphicon glyphicon-minus-sign'></span></button>
+        Hours: <%= hours %>
+        <button 
+          class='add-hour btn btn-sm btn-success
+          <% if(deliverable.get('completed')) {%> disabled <% } %>'>
+          <span class='glyphicon glyphicon-plus-sign'></span></button>
       </div>
+    
+    
+      <h4>description:</h4>
+      <pre><%= deliverable.escape('description') %></pre>
+    
     </div>
+  </div>
+  
+  <!-- <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-default"
+      data-dismiss="modal">Close</button>
+    <button
+      type="button"
+      class="btn btn-primary">Save
+      <span class='glyphicon glyphicon-ok'></span>
+    </button>
+  </div> -->
 </div>

@@ -5,6 +5,8 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.resetSubviews);
     this.listenTo(this.model.hours(), 'add remove', this.render);
+    
+    
     this.getSubdeliverables();
     this.resetSubviews();
   },
@@ -30,9 +32,9 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     'click .hide-subdeliverables': 'hideSubdeliverables',
     'click .show-new-subdeliverable': 'toggleNewSubdeliverable',
     'submit .new-subdeliverable': 'newSubdeliverable',
-    'click .remove-task': 'removeTask',
     'click .add-hour': 'addHour',
-    'click .remove-hour': 'removeHour'
+    'click .remove-hour': 'removeHour',
+    'click .show-details': 'showModal'
   },
   
   addDeliverable: function(deliverable) {
@@ -109,25 +111,6 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.model.removeHour();
   },
   
-  removeTask: function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    event.currentTarget.setAttribute('disabled', 'disabled');
-    
-    var view = this;
-    
-    this.model.destroy({
-      wait: true,
-      success: function() {
-        view.remove();
-      },
-      error: function() {
-        alert('cannot remove a completed deliverable!');
-        event.currentTarget.removeAttribute('disabled');
-      }
-    });
-  },
-  
   render: function() {
     this.getSubdeliverables();
     
@@ -148,6 +131,20 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
     this.removeSubviews('.subdeliverables');
     this.getSubdeliverables();
     this.subdeliverables.forEach(this.addDeliverable.bind(this));
+  },
+  
+  showModal: function(event) {
+    event.stopPropagation();
+    
+    var detailView = new Freelancer.Views.Detail({
+      model: this.model
+    });
+
+    $('#deliverable-detail').html(detailView.render().$el);
+    $('#deliverable-detail').modal({
+      show: true,
+      backdrop: true
+    });
   },
   
   showSubdeliverables: function(event) {

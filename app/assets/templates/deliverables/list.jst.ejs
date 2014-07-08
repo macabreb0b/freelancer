@@ -22,7 +22,7 @@
 <% } %>
 
 <span class="<% if(deliverable.get('completed')) {%> completed <% } %>">
-  <%= deliverable.escape('name') %> <%  deliverable.id %>
+  <%= deliverable.escape('name') %>
 </span>
 
 <div class='panel panel-warning panel-hours'>
@@ -48,6 +48,12 @@
   <% if(deliverable.get('completed')) {%> disabled <% } %>">
   brn <span class='glyphicon glyphicon-fire danger'></span>
 </button>
+
+<button 
+  class="show-details btn btn-sm btn-default">
+  details <span class='glyphicon glyphicon-pencil'></span>
+</button>
+
 
 
 <ul class="subdeliverables"></ul>
