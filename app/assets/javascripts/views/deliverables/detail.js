@@ -10,6 +10,8 @@ Freelancer.Views.Detail = Backbone.View.extend({
     'click .unchecked': 'closeIt',
     'click .checked': 'openIt',
     'click .remove-task': 'removeTask',
+    'focus [contenteditable]': 'startEditing',
+    'blur [contenteditable]': 'stopEditing'
   },
   
   className: 'modal-dialog',
@@ -70,8 +72,25 @@ Freelancer.Views.Detail = Backbone.View.extend({
     
     this.$el.html(renderedContent);
     return this;
+  },
+  
+  startEditing: function(event) {
+    var $target = $(event.target);
+    // debugger
+    $target.data('before', event.target.innerText)
+    $target.on('keyup paste input DOMCharacterDataModified',
+         this.stopEditing.bind(this));
+  },
+  
+  stopEditing: function(event) {
+    var $target = $(event.target);
+    var newContent = event.target.innerText;
+    
+    if ($target.data('before') !== newContent) { 
+      var attr = $target.data('attr');
+    
+      this.model.set(attr, newContent);
+      this.model.save({}, { wait: true });
+    }
   }
-  
-  
-  
 });

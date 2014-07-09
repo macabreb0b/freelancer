@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703010704) do
+ActiveRecord::Schema.define(version: 20140708180141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140703010704) do
     t.datetime "updated_at"
     t.integer  "rank",                                  null: false
     t.boolean  "collapsed",             default: false
+    t.text     "description"
   end
 
   add_index "deliverables", ["parent_deliverable_id"], name: "index_deliverables_on_parent_deliverable_id", using: :btree

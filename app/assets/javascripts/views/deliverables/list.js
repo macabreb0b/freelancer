@@ -1,7 +1,7 @@
 /*global Freelancer, Backbone, JST, $, alert */
 Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   initialize: function() {
-    this.listenTo(this.model, 'change:completed', this.render);
+    this.listenTo(this.model, 'change:completed change:name', this.render);
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.resetSubviews);
     this.listenTo(this.model.hours(), 'add remove', this.render);

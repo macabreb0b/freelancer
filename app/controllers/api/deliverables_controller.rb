@@ -71,7 +71,8 @@ module Api
       def deliverable_params
         params.require(:deliverable)
               .permit(:name, :hourly, :completed, 
-              :parent_deliverable_id, :project_id, :rank, :collapsed)
+              :parent_deliverable_id, :project_id, 
+              :rank, :collapsed, :description)
       end
   end
 end

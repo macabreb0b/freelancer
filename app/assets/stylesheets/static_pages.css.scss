@@ -300,7 +300,15 @@ blockquote {
   }
 }
 
+[contenteditable]:hover {
+  cursor: pointer;
+}
+
 .deliverable-details {
 //  padding-left: 24px;
   margin-top: 3px;
+}
+
+.modal-dialog {
+  padding-top: 30px;
 }
