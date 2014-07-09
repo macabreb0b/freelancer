@@ -304,6 +304,10 @@ blockquote {
   cursor: pointer;
 }
 
+[contenteditable]:focus {
+ border: thin inset black; 
+}
+
 .deliverable-details {
 //  padding-left: 24px;
   margin-top: 3px;

@@ -94,21 +94,24 @@ Freelancer.Views.Detail = Backbone.View.extend({
       var attr = $target.data('attr');
 
       that.model.set(attr, newContent);
-      that.model.save({}, { wait: true });
+      that.model.save({}, { 
+        wait: true 
+      });
       that.waitForIt = true;
       that.timerId = false
     };
     
-    var $target = $(event.target);
-    var newContent = event.target.innerText;
-    if ($target.data('before') !== newContent) {
-      if(this.waitForIt) {
-        if(!this.timerId) {
-          this.timerId = setTimeout(sendEdit, 300);
-        }
-      } else {
-        sendEdit();
+    // var throttledEdit = _.throttle(sendEdit, 3000)
+    // var debouncedEdit = _.debounce(sendEdit, 300)
+    //
+    // throttledEdit();
+    // debouncedEdit();
+    if(this.waitForIt) {
+      if(!this.timerId) {
+        this.timerId = setTimeout(sendEdit, 100);
       }
+    } else {
+      sendEdit();
     }
   }
 });
