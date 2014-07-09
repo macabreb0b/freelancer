@@ -75,22 +75,40 @@ Freelancer.Views.Detail = Backbone.View.extend({
   },
   
   startEditing: function(event) {
+    this.waitForIt = false;
+    
     var $target = $(event.target);
     // debugger
     $target.data('before', event.target.innerText)
-    $target.on('keyup paste input DOMCharacterDataModified',
+    $target.on('DOMCharacterDataModified',
          this.stopEditing.bind(this));
   },
   
   stopEditing: function(event) {
+    // this.editable = true;
+    var that = this;
+    
+    var sendEdit = function() {
+      var $target = $(event.target);
+      var newContent = event.target.innerText;
+      var attr = $target.data('attr');
+
+      that.model.set(attr, newContent);
+      that.model.save({}, { wait: true });
+      that.waitForIt = true;
+      that.timerId = false
+    };
+    
     var $target = $(event.target);
     var newContent = event.target.innerText;
-    
-    if ($target.data('before') !== newContent) { 
-      var attr = $target.data('attr');
-    
-      this.model.set(attr, newContent);
-      this.model.save({}, { wait: true });
+    if ($target.data('before') !== newContent) {
+      if(this.waitForIt) {
+        if(!this.timerId) {
+          this.timerId = setTimeout(sendEdit, 300);
+        }
+      } else {
+        sendEdit();
+      }
     }
   }
 });
