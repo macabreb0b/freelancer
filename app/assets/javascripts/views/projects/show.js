@@ -4,7 +4,7 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   initialize: function() {
     this.listenTo(this.model.deliverables(), 'add', this.addDeliverable);
     this.listenTo(this.model.deliverables(), 'remove', this.resetSubviews);
-    this.listenTo(this.model, 'sync', this.render);
+    // this.listenTo(this.model, 'sync', this.render);
     this.listenTo(Freelancer.Collections.clients, 'sync', this.render);
     this.listenTo(this.model.deliverables(), 'add-hour', this.addHour);
     this.listenTo(this.model.deliverables(), 'remove-hour', this.removeHour);
@@ -17,7 +17,9 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   events: {
     'click .delete-project': 'deleteProject',
     'submit .new-deliverable': 'newDeliverable',
-    'click .make-invoice': 'makeInvoice'
+    'click .make-invoice': 'makeInvoice',
+    'focus [contenteditable]': 'startEditing',
+    'blur [contenteditable]': 'stopEditing'
   },
   
   template: JST['projects/show'],
@@ -116,5 +118,40 @@ Freelancer.Views.ShowProject = Backbone.CompositeView.extend({
   resetSubviews: function() {
     this.removeSubviews('.deliverables');
     this.model.deliverables().each(this.addDeliverable.bind(this));
+  },
+  
+  startEditing: function(event) {
+    this.waitForIt = false;
+    
+    var $target = $(event.target);
+    // debugger
+    $target.data('before', event.target.innerText)
+    $target.on('DOMCharacterDataModified',
+         this.stopEditing.bind(this));
+  },
+  
+  stopEditing: function(event) {
+    var that = this;
+    
+    var sendEdit = function() {
+      var $target = $(event.target);
+      var newContent = event.target.innerText;
+      // var attr = $target.data('attr');
+
+      that.model.set('description', newContent);
+      that.model.save({}, { 
+        wait: true 
+      });
+      that.waitForIt = true;
+      that.timerId = false
+    };
+    
+    if(this.waitForIt) {
+      if(!this.timerId) {
+        this.timerId = setTimeout(sendEdit, 100);
+      }
+    } else {
+      sendEdit();
+    }
   }
 });

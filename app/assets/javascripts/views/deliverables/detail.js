@@ -1,3 +1,5 @@
+/*global Freelancer, Backbone, $, setTimeout, JST, alert */
+
 Freelancer.Views.Detail = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model, 'change:completed', this.render);
@@ -75,17 +77,18 @@ Freelancer.Views.Detail = Backbone.View.extend({
   },
   
   startEditing: function(event) {
+    event.stopPropagation();
     this.waitForIt = false;
     
     var $target = $(event.target);
-    // debugger
-    $target.data('before', event.target.innerText)
+    $target.data('before', event.target.innerText);
     $target.on('DOMCharacterDataModified',
          this.stopEditing.bind(this));
   },
   
   stopEditing: function(event) {
-    // this.editable = true;
+    event.stopPropagation();
+    
     var that = this;
     
     var sendEdit = function() {
@@ -98,14 +101,9 @@ Freelancer.Views.Detail = Backbone.View.extend({
         wait: true 
       });
       that.waitForIt = true;
-      that.timerId = false
+      that.timerId = false;
     };
-    
-    // var throttledEdit = _.throttle(sendEdit, 3000)
-    // var debouncedEdit = _.debounce(sendEdit, 300)
-    //
-    // throttledEdit();
-    // debouncedEdit();
+
     if(this.waitForIt) {
       if(!this.timerId) {
         this.timerId = setTimeout(sendEdit, 100);

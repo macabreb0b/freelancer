@@ -1,8 +1,7 @@
 <ol class='breadcrumb'>
   <li><a href="#/">home</a></li>
   <li><a href="#/projects">projects</a></li>
-  <li><a href='#/projects<% if(typeof project !== 'undefined') { %>
-    <%= project.id %>/'><%= project.escape('name').toLowerCase() %></a>
+  <li><a href='#/projects/<% if(typeof project !== 'undefined') { %><%= project.id %>'><%= project.escape('name').toLowerCase() %></a>
     <% } else { %>
       '>project</a>
     <% }%></li>
@@ -54,7 +53,7 @@
     </tr>
   </tfoot>
 </table>
-<a href="#/invoices/<%= invoice.id %>/edit">
+<a class='disabled' href="#/invoices/<%= invoice.id %>/edit">
   edit invoice</a>&nbsp;
 <button 
   class='drop-invoice btn btn-sm btn-default'>

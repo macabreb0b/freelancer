@@ -63,7 +63,10 @@ $<%= project.escape('hourly') %>.00</span>
     loading client...
   <% } %>
 <h4>description:</h4>
-<pre class='pre-scrollable'><%= project.escape('description') %></pre>
+<pre
+  contenteditable='true'
+  class='pre-scrollable'
+  ><%= project.escape('description') %></pre>
 <h4>Deliverables:</h4>
 
 <form class='new-deliverable form-inline' role='form'>
