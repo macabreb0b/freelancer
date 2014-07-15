@@ -50,11 +50,11 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     var view = this;
     
     this.collection.models = 
-          _.sortBy(this.collection.models, function(thing) {
+          _.sortBy(this.collection.models, function(model) {
       if(view.reverse) {
-        return new Date(thing.get('date'));
+        return new Date(model.get('date'));
       } else {
-        return new Date(thing.escape('date')) * -1;
+        return new Date(model.escape('date')) * -1;
       }
     });
     
@@ -68,11 +68,11 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     var view = this;
     
     this.collection.models = 
-          _.sortBy(this.collection.models, function(thing) {
+          _.sortBy(this.collection.models, function(model) {
       if(view.reverse) {
-        return thing.id;
+        return model.id;
       } else {
-        return -thing.id;
+        return -model.id;
       }
     });
     
@@ -86,15 +86,15 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     var view = this;
 
     this.collection.models = 
-          _.sortBy(this.collection.models, function(thing) {
+          _.sortBy(this.collection.models, function(model) {
       if(view.reverse) {
-        if(thing.get('paid')) {
+        if(model.get('paid')) {
           return 1;
         } else {
           return -1;
         }
       } else {
-        if(thing.get('paid')) {
+        if(model.get('paid')) {
           return -1;
         } else {
           return 1;
@@ -112,9 +112,9 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     var view = this;
     
     this.collection.models = 
-          _.sortBy(this.collection.models, function(thing) {
+          _.sortBy(this.collection.models, function(model) {
       var project = Freelancer.Collections.projects
-            .get(thing.get('project_id'));
+            .get(model.get('project_id'));
       str = project.get('name').split('');
       
       var multiplier = 1;
@@ -138,11 +138,11 @@ Freelancer.Views.InvoicesIndex = Backbone.View.extend({
     var view = this;
     
     this.collection.models = 
-          _.sortBy(this.collection.models, function(thing) {
+          _.sortBy(this.collection.models, function(model) {
       if(view.reverse) {
-        return thing.total();
+        return model.total();
       } else {
-        return -thing.total();
+        return -model.total();
       }
     });
     
