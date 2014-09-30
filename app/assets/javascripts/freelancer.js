@@ -6,7 +6,7 @@ window.Freelancer = {
   Views: {},
   Routers: {},
   initialize: function($rootEl) {
-    new Freelancer.Routers.AppRouter({
+    router = new Freelancer.Routers.AppRouter({
       $rootEl: $rootEl
     });
     Backbone.history.start();

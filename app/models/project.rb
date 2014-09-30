@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
   
   def invoice!
     begin
-      invoice = Invoice.create({ paid: false, project_id: id, date: Time.now })
+      invoice = Invoice.create!({ paid: false, project_id: id, date: Time.now })
       uninvoiced_hours.update_all(invoice_id: invoice.id)
     rescue
       false

@@ -38,6 +38,12 @@ class Invoice < ActiveRecord::Base
   end
   
   def set_number
-    self.number ||= user.invoices.last.number + 1
+    last_invoice = user.invoices.last
+    
+    if !!last_invoice
+      self.number ||= last_invoice.number + 1
+    else
+      self.number ||= 1
+    end
   end
 end
