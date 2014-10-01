@@ -7,5 +7,5 @@ json.updated_at deliverable.updated_at
 json.created_at deliverable.created_at
 json.rank deliverable.rank
 json.collapsed deliverable.collapsed
-json.count deliverable.count_by_invoice(id)
+json.count deliverable.count_by_invoice(invoice)
 json.hourly deliverable.hourly

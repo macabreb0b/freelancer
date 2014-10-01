@@ -12,6 +12,7 @@
 #  updated_at            :datetime
 #  rank                  :integer          not null
 #  collapsed             :boolean          default(FALSE)
+#  description           :text
 #
 
 class Deliverable < ActiveRecord::Base
@@ -38,8 +39,12 @@ class Deliverable < ActiveRecord::Base
         
 
 
-  def count_by_invoice(id)
-    hours.where("hours.invoice_id = ?", id).count
+  def hours_by_invoice(invoice)
+    hours.where("hours.invoice_id = ?", invoice.id)
+  end
+  
+  def count_by_invoice(invoice)
+    hours_by_invoice(invoice).count
   end
     
   def all_children

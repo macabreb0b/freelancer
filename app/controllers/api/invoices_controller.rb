@@ -1,5 +1,4 @@
 class Api::InvoicesController < ApplicationController
-  
   def destroy
     @invoice = Invoice.find(params[:id])
     ActiveRecord::Base.transaction do
@@ -24,7 +23,17 @@ class Api::InvoicesController < ApplicationController
   
   def show
     @invoice = Invoice.find(params[:id])
-    render 'show'
+    
+    respond_to do |format|
+      format.json { render 'show' }
+      format.pdf do 
+        pdf = InvoicePdf.new
+        send_data pdf.render(@invoice),
+          filename: "#{Time.now.utc}.pdf",
+          type: "application/pdf",
+          disposition: "inline"
+      end
+    end
   end
   
   def update

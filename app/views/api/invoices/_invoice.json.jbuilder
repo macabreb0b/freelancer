@@ -4,6 +4,6 @@ deliverables ||= nil
 unless deliverables.nil?
   json.deliverables(deliverables) do |deliverable|
     json.partial!("api/deliverables/deliverable_invoice",
-      deliverable: deliverable, id: invoice.id)
+      deliverable: deliverable, invoice: invoice)
   end
 end

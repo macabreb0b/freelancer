@@ -14,6 +14,8 @@ gem 'devise'
 gem 'backbone-on-rails'
 gem 'rails_12factor'
 gem 'thin'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development do
   gem 'spring'
@@ -21,5 +23,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'debugger'
+  gem 'pry-rails'
 end
 

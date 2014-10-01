@@ -12,6 +12,7 @@
 #  updated_at            :datetime
 #  rank                  :integer          not null
 #  collapsed             :boolean          default(FALSE)
+#  description           :text
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

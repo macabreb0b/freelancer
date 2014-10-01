@@ -8,6 +8,7 @@
 #  paid       :boolean          not null
 #  created_at :datetime
 #  updated_at :datetime
+#  number     :integer
 #
 
 class Invoice < ActiveRecord::Base

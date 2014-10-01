@@ -10,6 +10,7 @@
 #  description :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  hourly      :integer          default(0), not null
 #
 
 class Project < ActiveRecord::Base
