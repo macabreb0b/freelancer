@@ -27,7 +27,7 @@ class InvoicePdf < Prawn::Document
   
   def invoice_item_rows
     total_price = 0
-    [["Description", "Quantity", "Rate", "Total"]] +
+    [["Description", "Hours", "Rate", "Total"]] +
     @invoice.deliverables.map do |deliverable|
       quantity = deliverable.count_by_invoice(@invoice)
       price = quantity * deliverable.hourly
@@ -35,9 +35,9 @@ class InvoicePdf < Prawn::Document
       
       ["#{deliverable.name} ",
             quantity,
-            "#{deliverable.hourly}  ",
-            "#{price}"]
-    end + [[nil, nil, "TOTAL:", total_price]]
+            "$#{deliverable.hourly}/hr ",
+            "$#{price}"]
+    end + [[nil, nil, "TOTAL:", "$#{total_price}"]]
 
   end
 end
