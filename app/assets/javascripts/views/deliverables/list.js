@@ -136,12 +136,12 @@ Freelancer.Views.DeliverableListView = Backbone.CompositeView.extend({
   showModal: function(event) {
     event.stopPropagation();
     
-    var detailView = new Freelancer.Views.Detail({
+    var detailView = new Freelancer.Views.DeliverableDetail({
       model: this.model
     });
 
-    $('#deliverable-detail').html(detailView.render().$el);
-    $('#deliverable-detail').modal({
+    $('#detail-view').html(detailView.render().$el);
+    $('#detail-view').modal({
       show: true,
       backdrop: true
     });

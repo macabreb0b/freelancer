@@ -37,11 +37,19 @@ class Api::InvoicesController < ApplicationController
   end
   
   def update
+    @invoice = Invoice.find(params[:id])
+    
+    if @invoice.update(invoice_params) 
+      head :ok
+    else
+      render json: @invoice.errors.full_messages, status: 422
+    end
   end
   
   private
   
     def invoice_params
+      params.require(:invoice).permit(:user_address_id, :client_address_id)
     end
 end
   

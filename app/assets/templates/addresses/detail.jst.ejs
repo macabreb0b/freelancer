@@ -1,0 +1,15 @@
+<% if(address.escape('name')) { %>
+  <%= address.escape('name') %><br>
+<% } %>
+
+<% if(address.escape('company_name')) { %>
+  <%= address.escape('company_name') %><br>
+<% } %>
+
+<%= address.escape('street_1') %><br>
+
+<% if(address.escape('street_2')) { %>
+  <%= address.escape('street_2') %><br>
+<% } %>
+<%= address.escape('city') + ', ' + address.escape('state') 
+      + ' ' + address.escape('zip') %>

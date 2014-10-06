@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708180141) do
+ActiveRecord::Schema.define(version: 20141006022257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
+    t.string   "street_1",                   null: false
+    t.string   "street_2"
+    t.string   "city",                       null: false
+    t.string   "state",            limit: 2, null: false
+    t.string   "zip",                        null: false
+    t.integer  "addressable_id",             null: false
+    t.string   "addressable_type",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.string   "company_name"
+  end
+
+  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "clients", force: true do |t|
     t.string   "name",       null: false
@@ -54,12 +70,14 @@ ActiveRecord::Schema.define(version: 20140708180141) do
   add_index "hours", ["deliverable_id"], name: "index_hours_on_deliverable_id", using: :btree
 
   create_table "invoices", force: true do |t|
-    t.integer  "project_id", null: false
-    t.datetime "date",       null: false
-    t.boolean  "paid",       null: false
+    t.integer  "project_id",        null: false
+    t.datetime "date",              null: false
+    t.boolean  "paid",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "number"
+    t.integer  "client_address_id"
+    t.integer  "user_address_id"
   end
 
   add_index "invoices", ["project_id"], name: "index_invoices_on_project_id", using: :btree

@@ -40,8 +40,8 @@ Backbone.Collection.prototype.getOrFetch = function(id) {
 
 Backbone.View.prototype.spinner = function(selector) {
   var $target;
-  if(selector) {
-    $target = this.$el.find(selector)
+  if(typeof selector !== 'undefined') {
+    $target = this.$(selector)
   } else {
     $target = this.$el
   }

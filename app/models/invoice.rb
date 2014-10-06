@@ -14,8 +14,7 @@
 class Invoice < ActiveRecord::Base
   validates :date, :project, :number, :presence => true
   validates :paid, inclusion: { in: [true, false] }
-  before_validation :set_number
-  
+  before_validation :increment_number_of_previous_invoice
   
   belongs_to :project
   has_one :client, through: :project
@@ -24,8 +23,17 @@ class Invoice < ActiveRecord::Base
   has_many :hours
   has_many :deliverables, -> { uniq }, through: :hours
   
+  belongs_to :user_address,
+    foreign_key: :user_address_id, 
+    class_name: "Address",
+    primary_key: :id
+    
+  belongs_to :client_address,
+    foreign_key: :client_address_id,
+    class_name: "Address",
+    primary_key: :id
   
-  # remove these in favor of client fetch on invoice#show
+  # TODO: remove these in favor of client fetch on invoice#show
   def client_name
     client.name
   end
@@ -38,13 +46,18 @@ class Invoice < ActiveRecord::Base
     client.phone
   end
   
-  def set_number
-    last_invoice = user.invoices.last
-    
-    if !!last_invoice
-      self.number ||= last_invoice.number + 1
-    else
-      self.number ||= 1
-    end
+  def client_id
+    client.id
   end
+  
+  private 
+    def increment_number_of_previous_invoice
+      last_invoice = user.invoices.last
+    
+      if !!last_invoice
+        self.number ||= last_invoice.number + 1
+      else
+        self.number ||= 1
+      end
+    end
 end

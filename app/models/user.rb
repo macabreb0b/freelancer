@@ -22,10 +22,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-         
   has_many :clients, dependent: :destroy
-  
   has_many :projects, through: :clients
-  
   has_many :invoices, through: :projects
+  has_many :addresses, as: :addressable
 end

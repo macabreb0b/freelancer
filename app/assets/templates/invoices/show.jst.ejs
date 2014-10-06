@@ -11,18 +11,42 @@
 </ol>
 
 <h2>Invoice No. <%= invoice.get('number') %></h2>
-<h4>date:</h4>
-<%= invoice.date() %>
+<div>
+  <h4>date:</h4>
+  <%= invoice.date() %>  
+  <a href="#/projects/<%= invoice.escape('project_id') %>"
+    ><span 
+    class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
+</div>
 
-<a href="#/projects/<%= invoice.escape('project_id') %>"
-  ><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a>
-<h4>invoice to:</h4>
-<%= invoice.escape('client_name') %>
-<a href="#/clients/<%= invoice.escape('client_id') %>"
-  ><span class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a><br>
-<%= invoice.escape('client_phone') %><br>
-<%= invoice.escape('client_email') %><br>
-<br>
+<div>
+  <h4>invoice to:</h4>
+  <div class='address-holder'>
+    <%= invoice.escape('client_name') %>
+    <a href="#/clients/<%= invoice.escape('client_id') %>"
+      ><span 
+      class='take-me-there glyphicon glyphicon-circle-arrow-right'></span></a><br>
+    <%= invoice.escape('client_phone') %><br>
+    <%= invoice.escape('client_email') %><br>
+  </div>
+</div>
+
+<div class='invoice-from'>
+  <h4>invoice from:</h4>
+    
+  <div class='address-holder'>
+    <div class='user-address'>
+      
+    </div>
+    
+    <div class='address-overlay'>
+      <span class='select-address'>select address</span>
+    </div>
+    
+    <div class='address-list-popup'></div>
+  </div>
+</div>
+
 <h4>work delivered:</h4>
 <table class='invoice-table table table-hover'>
   <thead>

@@ -316,3 +316,61 @@ blockquote {
 .modal-dialog {
   padding-top: 30px;
 }
+
+.address-holder {
+  display:inline-block;
+  position:relative;
+  min-height:30px;
+  min-width: 150px;
+}
+
+.address-holder .address-overlay {
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background-color: #E86C38;
+  opacity: 0;
+  color: white;
+  border-radius: 5px;
+  margin:-3px;
+  transition:opacity .4s linear;
+}
+
+.address-holder .address-overlay .select-address {
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.address-holder:hover .address-overlay {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.address-list-popup {
+  display:none;
+  position:absolute;
+  top: 50%;
+  left: 100%;
+  width: 250px;
+  min-height: 100%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 5px;
+  border: thin solid grey;
+  padding: 10px;
+}
+
+.addresses {
+  min-height: 40px;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.address-detail {
+  border: thin solid grey;
+  padding: 5px;
+  cursor: pointer;
+  list-style:none;
+}

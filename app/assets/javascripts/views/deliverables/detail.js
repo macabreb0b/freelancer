@@ -1,4 +1,4 @@
-Freelancer.Views.Detail = Backbone.View.extend({
+Freelancer.Views.DeliverableDetail = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model, 'change:completed', this.render);
     this.listenTo(this.model.hours(), 'add remove', this.render);
