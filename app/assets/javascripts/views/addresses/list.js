@@ -20,7 +20,17 @@ Freelancer.Views.AddressListView = Backbone.CompositeView.extend({
   },
   
   events: {
-    'click .close': 'closeView'
+    'click .close': 'closeView',
+    'click .new-address': 'showNewAddressForm',
+    'click .cancel-edit': 'hideNewAddressForm'
+  },
+  
+  hideNewAddressForm: function(event) {
+    event.preventDefault();
+    
+    this.$('.new-address-holder').html(
+      '<a href="#" class="new-address">new address</a>'
+    )
   },
   
   initialize: function(options) {
@@ -38,6 +48,16 @@ Freelancer.Views.AddressListView = Backbone.CompositeView.extend({
   setNewAddress: function(address) {
     this.model.setUserAddress(address);
     this.closeView();
+  },
+  
+  showNewAddressForm: function(event) {
+    event.preventDefault();
+    var formView = new Freelancer.Views.NewAddress({
+      model: new Freelancer.Models.Address,
+      collection: this.collection
+    });
+    
+    this.$('.new-address-holder').html(formView.render().$el);
   },
 
   template: JST['addresses/list']

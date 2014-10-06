@@ -3,5 +3,7 @@ Freelancer.Models.Address = Backbone.Model.extend({
     if(options && options.addressable) {
       this.addressable = options.addressable;
     }
-  }
+  },
+  
+  urlRoot: 'api/addresses'
 })

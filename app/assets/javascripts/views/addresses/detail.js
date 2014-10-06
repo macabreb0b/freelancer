@@ -2,11 +2,7 @@ Freelancer.Views.AddressDetail = Backbone.View.extend({
   events: {
     'click': 'selectAddress'
   },
-  
-  initialize: function() {
-    
-  },
-  
+
   tagName: "li",
   
   className: 'address-detail',

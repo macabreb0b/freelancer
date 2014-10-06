@@ -6,7 +6,6 @@ Freelancer.Views.ShowInvoice = Backbone.CompositeView.extend({
     
     this.addUserAddress(this.model.userAddress());
     this.showAddressList = false;
-    view = this;
   },
   
   template: JST['invoices/show'],
@@ -33,7 +32,6 @@ Freelancer.Views.ShowInvoice = Backbone.CompositeView.extend({
   
   dropInvoice: function() {
     var project_id = this.model.get('project_id');
-    // var project = Freelancer.Collections.projects.getOrFetch(project_id);
     this.spinner();
     
     this.model.destroy({
@@ -97,15 +95,5 @@ Freelancer.Views.ShowInvoice = Backbone.CompositeView.extend({
     this.$('.address-list-popup').hide();
     this.showAddressList = false;
   }
-  
-  // hideAddressBox: function(event) {
-  //   alert('hiding');
-  //
-  //   event.preventDefault();
-  //   var addressView = this.subviews('.address-list')[0];
-  //   this.removeSubview('.address-list', addressView);
-  //   this.$('.address-list').hide();
-  // }
-  //
   
 });

@@ -1,0 +1,81 @@
+<a 
+  href='#' 
+  class='cancel-edit'>
+  <span 
+    class='glyphicon glyphicon-remove'></span>
+</a>
+
+<label  
+  for='address_name'>
+  name</label>
+<input 
+  type='text' 
+  name='address[name]' 
+  id='address_name'
+  value='<%= address.escape('name') %>'
+  placeholder='Ned Ruggeri'><br>
+  
+<label  
+  for='address_company_name'>
+  company_name</label>
+<input 
+  type='text' 
+  name='address[company_name]' 
+  id='address_company_name'
+  value='<%= address.escape('company_name') %>'
+  placeholder='App Academy'><br>
+  
+<label  
+  for='address_street_1'>
+  street_1</label>
+<input 
+  type='text' 
+  name='address[street_1]' 
+  id='address_street_1'
+  value='<%= address.escape('street_1') %>'
+  placeholder='1061 Market St'><br>
+  
+<label  
+  for='address_street_2'>
+  street_2</label>
+<input 
+  type='text'
+  name='address[street_2]' 
+  id='address_street_2'
+  value='<%= address.escape('street_2') %>'
+  placeholder='Fourth Floor'><br>
+  
+<label  
+  for='address_city'>
+  city</label>
+<input 
+  type='text' 
+  name='address[city]' 
+  id='address_city'
+  value='<%= address.escape('city') %>'
+  placeholder='San Francisco'>
+  
+<label  
+  for='address_state'>
+  state</label>
+<input 
+  type='text' 
+  name='address[state]' 
+  id='address_state'
+  value='<%= address.escape('state') %>'
+  placeholder='CA'>
+  
+<label  
+  for='address_zip'>
+  zip</label>
+<input 
+  type='text' 
+  name='address[zip]' 
+  id='address_zip'
+  value='<%= address.escape('zip') %>'
+  placeholder='94103'><br>
+  
+<button>Save</button>
+
+  
+  

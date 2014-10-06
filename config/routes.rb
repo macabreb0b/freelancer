@@ -21,6 +21,6 @@ Rails.application.routes.draw do
       resources :hours, only: [:destroy]
     end
     
-    resources :addresses, only: [:index, :ceate]
+    resources :addresses, only: [:index, :create]
   end
 end

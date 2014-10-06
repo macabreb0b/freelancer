@@ -14,5 +14,12 @@ module Api
         render json: @address.errors.full_messages, status: 422
       end
     end
+    
+    private
+    
+    def address_params
+      params.require(:address).permit(:name, :company_name, 
+            :street_1, :street_2, :city, :state, :zip)
+    end
   end
 end

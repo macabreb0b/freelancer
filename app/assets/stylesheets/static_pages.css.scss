@@ -369,8 +369,19 @@ blockquote {
 }
 
 .address-detail {
-  border: thin solid grey;
-  padding: 5px;
   cursor: pointer;
   list-style:none;
+}
+
+.address-detail, .address-form {
+  border: thin solid grey;
+  padding: 5px;
+}
+
+.address-form label {
+  display:none;
+}
+
+.address-form .cancel-edit {
+  float:right;
 }
