@@ -10,9 +10,14 @@ Freelancer.Views.AddressDetail = Backbone.View.extend({
   template: JST['addresses/detail'],
 
   render: function() {
-    var renderedContent = this.template({
-      address: this.model
-    });
+    if(this.model.isNew()) {
+      var renderedContent = 'make an address!'
+    } else {
+      var renderedContent = this.template({
+        address: this.model
+      });
+    }
+    
     
     this.$el.html(renderedContent);
     return this;
