@@ -12,7 +12,8 @@ Freelancer.Views.ShowInvoice = Backbone.CompositeView.extend({
   
   events: {
     'click .drop-invoice': 'dropInvoice',
-    'click .address-holder': 'showAddresses'
+    'click .address-holder': 'showAddresses',
+    'click .make-pdf': 'makePdf'
   },
   
   addUserAddress: function(address) {
@@ -94,6 +95,10 @@ Freelancer.Views.ShowInvoice = Backbone.CompositeView.extend({
   hideAddressBox: function() {
     this.$('.address-list-popup').hide();
     this.showAddressList = false;
+  },
+  
+  makePdf: function(event) {
+    window.location = '/invoices/' + this.model.get('id') + '.pdf'
   }
   
 });

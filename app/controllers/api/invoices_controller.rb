@@ -1,6 +1,9 @@
 class Api::InvoicesController < ApplicationController
+  before_action :authenticate_user!
+  
   def destroy
-    @invoice = Invoice.find(params[:id])
+    @invoice = current_user.invoices.find(params[:id])
+    
     ActiveRecord::Base.transaction do
       begin
         @invoice.hours.each do |hour|
@@ -22,7 +25,7 @@ class Api::InvoicesController < ApplicationController
   end
   
   def show
-    @invoice = Invoice.find(params[:id])
+    @invoice = current_user.invoices.find(params[:id])
     
     respond_to do |format|
       format.json { render 'show' }
@@ -37,7 +40,7 @@ class Api::InvoicesController < ApplicationController
   end
   
   def update
-    @invoice = Invoice.find(params[:id])
+    @invoice = current_user.invoices.find(params[:id])
     
     if @invoice.update(invoice_params) 
       head :ok

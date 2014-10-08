@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: 'static_pages#root'
   devise_for :users
   
+  get 'invoices/:id.pdf', to: 'api/invoices#show', format: 'pdf'
+  
   namespace :api, defaults: { format: :json } do
     resources :clients do
       resources :projects, only: [:index, :create]
